@@ -17,7 +17,11 @@
     --font:       'Roboto', sans-serif;
   }
 
-  * { box-sizing: border-box; }
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 
   html, body {
     margin: 0;
@@ -49,20 +53,16 @@
   }
   .export-btn:hover { background: #0a2058; }
 
-  /* Page container, sized for US Letter */
-  .page {
+  /* Document container for screen preview */
+  .document {
     width: 8.5in;
-    min-height: 11in;
     margin: 24px auto;
     background: var(--page-bg);
-    padding: 0;
     box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    page-break-after: always;
-    position: relative;
+    padding: 0;
   }
-  .page:last-of-type { page-break-after: auto; }
 
-  /* Header: white logo band + navy title band (matches datasheet) */
+  /* Header: white logo band + navy title band (appears once at start of doc) */
   .logo-band {
     padding: 0.45in 0.6in 0.25in;
     background: #fff;
@@ -98,7 +98,7 @@
     padding: 0.4in 0.6in 0.5in;
   }
 
-  /* Section headings with cyan underrule (Wavelet-style from datasheet) */
+  /* Section headings with cyan underrule */
   h2.section {
     color: var(--navy);
     font-family: var(--font);
@@ -116,7 +116,7 @@
   }
   h2.section:first-of-type { margin-top: 0; }
 
-  /* Subsection labels (e.g. Customer Data., Service Data.) */
+  /* Subsection labels */
   h3.sub {
     color: var(--navy);
     font-family: var(--font);
@@ -135,7 +135,6 @@
     color: var(--ink);
   }
 
-  /* All-caps legal copy gets a slight stylistic treatment */
   p.legal-caps {
     font-size: 9.5pt;
     font-weight: 500;
@@ -185,38 +184,67 @@
     color: var(--navy);
   }
 
-  /* Footer */
-  .footer {
-    border-top: 1px solid var(--rule);
-    padding: 0.18in 0.6in;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 8pt;
-    color: var(--muted);
-  }
-  .footer .left { letter-spacing: 0.4px; }
-  .footer .right { color: var(--navy); font-weight: 500; }
-
-  /* Avoid awkward page breaks inside sections */
+  /* Page break controls */
   h2.section, h3.sub { page-break-after: avoid; break-after: avoid; }
-  p, ul.definitions { page-break-inside: avoid; break-inside: avoid; }
+  h2.section + p, h3.sub + p { page-break-before: avoid; break-before: avoid; }
+  ul.definitions { page-break-inside: avoid; break-inside: avoid; }
+  .contact-block { page-break-inside: avoid; break-inside: avoid; }
 
-  /* PRINT */
+  /* ===========================================================
+     PRINT SETUP
+     @page rules handle margins, running footer (and running
+     header on pages 2+). Content flows naturally; browser
+     paginates based on physical letter page size.
+     =========================================================== */
+  @page {
+    size: letter;
+    margin: 0.7in 0.6in 0.7in 0.6in;
+
+    @top-left {
+      content: "NightOwl Monitoring  ·  Terms and Conditions";
+      font-family: 'Roboto', sans-serif;
+      font-size: 8pt;
+      color: #5a5a5a;
+      padding-bottom: 6pt;
+      vertical-align: bottom;
+    }
+
+    @bottom-left {
+      content: "NightOwl Monitoring LLC  ·  nightowlmonitoring.com";
+      font-family: 'Roboto', sans-serif;
+      font-size: 8pt;
+      color: #5a5a5a;
+      vertical-align: top;
+      padding-top: 6pt;
+    }
+
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-family: 'Roboto', sans-serif;
+      font-size: 8pt;
+      color: #071842;
+      font-weight: 500;
+      vertical-align: top;
+      padding-top: 6pt;
+    }
+  }
+
+  /* No running header on first page since full header is in content */
+  @page :first {
+    margin-top: 0.3in;
+    @top-left { content: ""; }
+  }
+
   @media print {
     html, body { background: #fff; }
     .export-bar { display: none; }
-    .page {
+    .document {
       margin: 0;
       box-shadow: none;
       width: 100%;
-      min-height: auto;
-      page-break-after: auto;
     }
-    @page {
-      size: letter;
-      margin: 0;
-    }
+    /* Pull the header into the printable area on page 1 */
+    .logo-band { padding-top: 0.15in; }
   }
 </style>
 </head>
@@ -226,10 +254,9 @@
   <button class="export-btn" onclick="window.print()">Export to PDF</button>
 </div>
 
-<!-- =============== PAGE 1 =============== -->
-<div class="page">
+<div class="document">
 
-  <!-- Header -->
+  <!-- Header (appears once at top of document) -->
   <div class="logo-band">
     <!-- Replace src with your HubSpot-hosted logo URL, same one used on the datasheet -->
     <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_2_1722036423-trimmy-NightOwl-Monitoring-Logo-Color.png" alt="NightOwl Monitoring">
@@ -275,19 +302,6 @@
     <p>5.2. The Company employs industry-standard security measures to protect User Data but does not guarantee that unauthorized third parties will never be able to breach these security measures. The User agrees to notify the Company immediately of any unauthorized access to their account.</p>
     <p>5.3. Where access to the Service is provisioned through a Partner, such Partner may have administrative or data access privileges. The Company is not responsible for actions taken by such Partner, including access, modification, or sharing of User Data.</p>
 
-  </div>
-
-  <!-- Footer -->
-  <div class="footer">
-    <div class="left">NightOwl Monitoring LLC &nbsp;&middot;&nbsp; nightowlmonitoring.com</div>
-    <div class="right">Page 1</div>
-  </div>
-</div>
-
-<!-- =============== PAGE 2 =============== -->
-<div class="page">
-  <div class="body">
-
     <h2 class="section"><span class="num">6.</span>Service Availability and Maintenance</h2>
     <p>6.1. The Company aims to provide continuous access to the Service but does not guarantee uninterrupted or error-free operation. Maintenance or upgrades may occasionally disrupt the Service.</p>
     <p>6.2. The Company reserves the right to suspend or discontinue the Service temporarily or permanently with or without notice.</p>
@@ -314,18 +328,6 @@
     <h2 class="section"><span class="num">12.</span>Changes to Terms</h2>
     <p>12.1. The Company reserves the right to modify these Terms at any time. Users will be notified of any material changes, and continued use of the Service constitutes acceptance of the revised Terms.</p>
 
-  </div>
-
-  <div class="footer">
-    <div class="left">NightOwl Monitoring LLC &nbsp;&middot;&nbsp; nightowlmonitoring.com</div>
-    <div class="right">Page 2</div>
-  </div>
-</div>
-
-<!-- =============== PAGE 3 =============== -->
-<div class="page">
-  <div class="body">
-
     <h2 class="section"><span class="num">13.</span>Equipment and System Liability</h2>
 
     <h3 class="sub">13.1 No Liability for Equipment Failure</h3>
@@ -350,18 +352,6 @@
     <p>Customer and its End Users shall not rely exclusively on any data, content, or information provided through the Services and must independently verify such information through other means.</p>
 
     <p>The Company shall not be responsible for any errors, omissions, or inaccuracies in data, content, or information provided through the Services, or for any actions taken in reliance thereon.</p>
-
-  </div>
-
-  <div class="footer">
-    <div class="left">NightOwl Monitoring LLC &nbsp;&middot;&nbsp; nightowlmonitoring.com</div>
-    <div class="right">Page 3</div>
-  </div>
-</div>
-
-<!-- =============== PAGE 4 =============== -->
-<div class="page">
-  <div class="body">
 
     <h2 class="section"><span class="num">14.</span>Term and Termination</h2>
 
@@ -391,10 +381,6 @@
 
   </div>
 
-  <div class="footer">
-    <div class="left">NightOwl Monitoring LLC &nbsp;&middot;&nbsp; nightowlmonitoring.com</div>
-    <div class="right">Page 4</div>
-  </div>
 </div>
 
 </body>
