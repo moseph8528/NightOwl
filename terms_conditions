@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NightOwl Monitoring | Terms and Conditions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #071842;
+    --cyan:       #4AC8F1;
+    --ink:        #1a1a1a;
+    --muted:      #5a5a5a;
+    --rule:       #d8dce5;
+    --page-bg:    #ffffff;
+    --font:       'Roboto', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #e9ecef;
+    font-family: var(--font);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Export button (hidden on print) */
+  .export-bar {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 100;
+  }
+  .export-btn {
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    font-family: var(--font);
+    font-size: 11pt;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .export-btn:hover { background: #0a2058; }
+
+  /* Page container, sized for US Letter */
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 24px auto;
+    background: var(--page-bg);
+    padding: 0;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-of-type { page-break-after: auto; }
+
+  /* Header: white logo band + navy title band (matches datasheet) */
+  .logo-band {
+    padding: 0.45in 0.6in 0.25in;
+    background: #fff;
+  }
+  .logo-band img {
+    height: 0.55in;
+    display: block;
+  }
+  .title-band {
+    background: var(--navy);
+    padding: 0.32in 0.6in;
+    border-top: 3px solid var(--cyan);
+  }
+  .title-band h1 {
+    color: #fff;
+    font-family: var(--font);
+    font-size: 26pt;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+  .title-band .doc-meta {
+    color: var(--cyan);
+    font-size: 9pt;
+    font-weight: 500;
+    margin-top: 4px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* Body content area */
+  .body {
+    padding: 0.4in 0.6in 0.5in;
+  }
+
+  /* Section headings with cyan underrule (Wavelet-style from datasheet) */
+  h2.section {
+    color: var(--navy);
+    font-family: var(--font);
+    font-size: 13pt;
+    font-weight: 700;
+    margin: 18pt 0 0;
+    padding-bottom: 4pt;
+    border-bottom: 2px solid var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  h2.section .num {
+    color: var(--cyan);
+    margin-right: 8px;
+  }
+  h2.section:first-of-type { margin-top: 0; }
+
+  /* Subsection labels (e.g. Customer Data., Service Data.) */
+  h3.sub {
+    color: var(--navy);
+    font-family: var(--font);
+    font-size: 10pt;
+    font-weight: 700;
+    margin: 10pt 0 4pt;
+  }
+
+  /* Body paragraphs */
+  p {
+    font-family: var(--font);
+    font-size: 10pt;
+    font-weight: 400;
+    line-height: 1.55;
+    margin: 6pt 0;
+    color: var(--ink);
+  }
+
+  /* All-caps legal copy gets a slight stylistic treatment */
+  p.legal-caps {
+    font-size: 9.5pt;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  /* Definitions list */
+  ul.definitions {
+    list-style: none;
+    padding: 0;
+    margin: 8pt 0;
+  }
+  ul.definitions li {
+    position: relative;
+    padding: 4pt 0 4pt 14pt;
+    font-size: 10pt;
+    line-height: 1.55;
+  }
+  ul.definitions li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11pt;
+    width: 6px;
+    height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+  }
+  ul.definitions li strong {
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  /* Contact block */
+  .contact-block {
+    margin-top: 10pt;
+    padding: 12pt 16pt;
+    background: #f5f7fa;
+    border-left: 3px solid var(--cyan);
+  }
+  .contact-block p {
+    margin: 2pt 0;
+    font-size: 10pt;
+  }
+  .contact-block .company {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding: 0.18in 0.6in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8pt;
+    color: var(--muted);
+  }
+  .footer .left { letter-spacing: 0.4px; }
+  .footer .right { color: var(--navy); font-weight: 500; }
+
+  /* Avoid awkward page breaks inside sections */
+  h2.section, h3.sub { page-break-after: avoid; break-after: avoid; }
+  p, ul.definitions { page-break-inside: avoid; break-inside: avoid; }
+
+  /* PRINT */
+  @media print {
+    html, body { background: #fff; }
+    .export-bar { display: none; }
+    .page {
+      margin: 0;
+      box-shadow: none;
+      width: 100%;
+      min-height: auto;
+      page-break-after: auto;
+    }
+    @page {
+      size: letter;
+      margin: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="export-bar">
+  <button class="export-btn" onclick="window.print()">Export to PDF</button>
+</div>
+
+<!-- =============== PAGE 1 =============== -->
+<div class="page">
+
+  <!-- Header -->
+  <div class="logo-band">
+    <!-- Replace src with your HubSpot-hosted logo URL, same one used on the datasheet -->
+    <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_2_1722036423-trimmy-NightOwl-Monitoring-Logo-Color.png" alt="NightOwl Monitoring">
+  </div>
+  <div class="title-band">
+    <h1>Terms and Conditions</h1>
+    <div class="doc-meta">NightOwl Remote Monitoring Program &nbsp;&middot;&nbsp; Updated April 28, 2026</div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <h2 class="section"><span class="num">1.</span>Acceptance of Terms</h2>
+    <p>By accessing or using NightOwl Monitoring's Remote Monitoring and Control Solution, you agree to be bound by these Terms and Conditions. If you do not agree to these Terms, please do not use the Service.</p>
+
+    <h2 class="section"><span class="num">2.</span>Definitions</h2>
+    <ul class="definitions">
+      <li><strong>Company:</strong> Refers to NightOwl Monitoring LLC, the provider of the remote monitoring solution.</li>
+      <li><strong>User:</strong> Any authorized individual or entity accessing the Service.</li>
+      <li><strong>Data:</strong> Any information or data generated, uploaded, or transmitted through the Service by the User.</li>
+      <li><strong>Service:</strong> The cloud SCADA solution provided by the Company for remote monitoring of water well systems.</li>
+      <li><strong>Partner:</strong> A third-party entity authorized to integrate, resell, or provide access to the Service, including through a separate platform or interface.</li>
+    </ul>
+
+    <h2 class="section"><span class="num">3.</span>Ownership and Use of Data</h2>
+
+    <h3 class="sub">3.1 Customer Data</h3>
+    <p>As between the parties, Customer retains all right, title, and interest in and to all data, information, and content that is uploaded, transmitted, or generated by Customer or its End Users through the Service ("Customer Data"). Customer hereby grants the Company a non-exclusive, worldwide, royalty-free license to use, host, store, process, transmit, and display Customer Data as necessary to provide, maintain, support, and improve the Service, and to comply with applicable law.</p>
+
+    <h3 class="sub">3.2 Aggregated and Anonymized Data</h3>
+    <p>The Company may collect, use, and create aggregated, anonymized, or de-identified data derived from Customer Data ("Aggregated Data") for any lawful purpose, including but not limited to operating, improving, and enhancing the Service, developing new products and services, benchmarking, analytics, and industry reporting. All Aggregated Data shall be owned exclusively by the Company. Aggregated Data will not identify Customer, End Users, or any individual, and will not include any information that could reasonably be used to re-identify Customer or any individual.</p>
+
+    <h3 class="sub">3.3 Service Data</h3>
+    <p>The Company may collect and use technical data, usage data, system performance data, and diagnostic information related to the operation of the Service ("Service Data"). Service Data does not include Customer Data and is owned by the Company. The Company may use Service Data for any lawful purpose, including improving system performance, security, and reliability.</p>
+
+    <h2 class="section"><span class="num">4.</span>Data Usage and Information Purposes</h2>
+    <p>4.1. The Company provides the Service for informational purposes only. While the Company aims to provide accurate and timely data, it does not guarantee the accuracy, completeness, or reliability of the data provided through the Service.</p>
+    <p>4.2. Users are responsible for validating the accuracy and completeness of the information provided by the Service before making decisions based on such information.</p>
+    <p>4.3. The Service may be accessed through or integrated with third-party platforms, applications, or service providers ("Partners"). The Company is not responsible for the operation, availability, performance, or security of any Partner platforms. Any data, alerts, or outputs presented through a Partner platform may be subject to additional processing, transformation, or interpretation by such Partner.</p>
+
+    <h2 class="section"><span class="num">5.</span>Access and Security</h2>
+    <p>5.1. Users are responsible for maintaining the confidentiality of their account credentials and are fully responsible for all activities conducted through their accounts.</p>
+    <p>5.2. The Company employs industry-standard security measures to protect User Data but does not guarantee that unauthorized third parties will never be able to breach these security measures. The User agrees to notify the Company immediately of any unauthorized access to their account.</p>
+    <p>5.3. Where access to the Service is provisioned through a Partner, such Partner may have administrative or data access privileges. The Company is not responsible for actions taken by such Partner, including access, modification, or sharing of User Data.</p>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="left">NightOwl Monitoring LLC &nbsp;&middot;&nbsp; nightowlmonitoring.com</div>
+    <div class="right">Page 1</div>
+  </div>
+</div>
+
+<!-- =============== PAGE 2 =============== -->
+<div class="page">
+  <div class="body">
+
+    <h2 class="section"><span class="num">6.</span>Service Availability and Maintenance</h2>
+    <p>6.1. The Company aims to provide continuous access to the Service but does not guarantee uninterrupted or error-free operation. Maintenance or upgrades may occasionally disrupt the Service.</p>
+    <p>6.2. The Company reserves the right to suspend or discontinue the Service temporarily or permanently with or without notice.</p>
+
+    <h2 class="section"><span class="num">7.</span>Intellectual Property</h2>
+    <p>7.1. The Service, including all software, technology, and content, is owned by or licensed to the Company and is protected by intellectual property laws. Users are granted a limited, non-exclusive, non-transferable, and revocable license to use the Service for their sole purposes.</p>
+    <p>7.2. Users may not reverse engineer, modify, distribute, or create derivative works of the Service without the Company's express written permission.</p>
+
+    <h2 class="section"><span class="num">8.</span>Limitation of Liability</h2>
+    <p class="legal-caps">8.1. TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COMPANY SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF DATA, REVENUE, OR PROFITS, EVEN IF THE COMPANY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+    <p class="legal-caps">8.2. THE COMPANY'S TOTAL LIABILITY FOR ANY CLAIM ARISING OUT OF OR RELATING TO THESE TERMS OR THE SERVICE SHALL NOT EXCEED THE AMOUNT PAID BY THE USER TO THE COMPANY IN THE 12 MONTHS PRECEDING THE CLAIM.</p>
+    <p class="legal-caps">8.3. THE COMPANY IS NOT RESPONSIBLE FOR THE INSTALLATION, WIRING, CONFIGURATION, OR MAINTENANCE OF ANY EQUIPMENT PERFORMED BY THIRD PARTIES, INCLUDING LICENSED INSTALLERS, ELECTRICIANS, OR PARTNERS. IMPROPER INSTALLATION MAY IMPACT SYSTEM PERFORMANCE, ACCURACY, OR RELIABILITY, AND ALL SUCH RISKS ARE ASSUMED BY THE USER.</p>
+
+    <h2 class="section"><span class="num">9.</span>Warranties and Disclaimers</h2>
+    <p class="legal-caps">9.1. THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED. THE COMPANY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+
+    <h2 class="section"><span class="num">10.</span>Confidentiality</h2>
+    <p>10.1. Both the Company and the User agree to treat all non-public information exchanged under these Terms as confidential and to use it only for purposes related to the Service.</p>
+
+    <h2 class="section"><span class="num">11.</span>Governing Law and Dispute Resolution</h2>
+    <p>11.1. These Terms shall be governed by and construed by the laws of the state of Texas without regard to its conflict of law principles.</p>
+    <p>11.2. NOTICE OF ARBITRATION. Any controversy or claim arising out of or relating to this contract, or the breach thereof (including without limitation the arbitrability of claims), shall be settled by arbitration administered by the American Arbitration Association in accordance with its Commercial Arbitration Rules, and judgment on the award rendered by the arbitrator(s) may be entered in any court having jurisdiction thereof.</p>
+
+    <h2 class="section"><span class="num">12.</span>Changes to Terms</h2>
+    <p>12.1. The Company reserves the right to modify these Terms at any time. Users will be notified of any material changes, and continued use of the Service constitutes acceptance of the revised Terms.</p>
+
+  </div>
+
+  <div class="footer">
+    <div class="left">NightOwl Monitoring LLC &nbsp;&middot;&nbsp; nightowlmonitoring.com</div>
+    <div class="right">Page 2</div>
+  </div>
+</div>
+
+<!-- =============== PAGE 3 =============== -->
+<div class="page">
+  <div class="body">
+
+    <h2 class="section"><span class="num">13.</span>Equipment and System Liability</h2>
+
+    <h3 class="sub">13.1 No Liability for Equipment Failure</h3>
+    <p>The Company is not responsible or liable for any equipment or water system failures, malfunctions, damages, or losses that may occur while using the Service. The User acknowledges and agrees that the Service is intended solely for information and monitoring purposes and does not prevent, predict, or protect against equipment failures, malfunctions, or other issues affecting water systems.</p>
+
+    <h3 class="sub">13.2 No Predictive Capabilities</h3>
+    <p>The Service does not provide predictive maintenance capabilities and should not be relied upon to forecast or prevent potential equipment failures or water system interruptions. Users are responsible for maintaining their equipment and conducting regular inspections and maintenance as needed.</p>
+
+    <h3 class="sub">13.3 User Responsibility for Equipment</h3>
+    <p>It is the User's sole responsibility to ensure that all equipment connected to the Service is properly installed, maintained, and functioning according to the manufacturer's specifications. The Company shall not be held liable for any direct or indirect damages resulting from equipment or water system failures, regardless of whether such failures were monitored through the Service.</p>
+
+    <h3 class="sub">13.4 Certifications, Advisory Nature of Services, Assumption of Risk</h3>
+    <p>The Company has not obtained hazardous location or similar safety certifications for the Hardware. If Customer requests that the Company obtain such certifications, all associated costs and expenses shall be borne solely by the Customer at the Company's then-current rates.</p>
+
+    <h3 class="sub">13.5 Third-Party Installation</h3>
+    <p>The Company is not responsible for the installation, wiring, configuration, or maintenance of any equipment performed by third parties, including licensed installers, electricians, or Partners. Improper installation may impact system performance, accuracy, or reliability, and all such risks are assumed by the User.</p>
+
+    <p>Customer (and its End Users) assumes all risk related to the use of the Hardware and Services. The Hardware, Connectivity Services, Hosting Services, and all data, content, and information provided therein are for informational and advisory purposes only and are not intended to ensure the safety of life, limb, health, or property.</p>
+
+    <p>Customer acknowledges that the Hardware and Services: (a) are not a substitute for professional judgment; and (b) do not relieve Customer or its End Users of their obligation to comply with all applicable laws, codes, regulations, and safety requirements.</p>
+
+    <p>Customer and its End Users shall not rely exclusively on any data, content, or information provided through the Services and must independently verify such information through other means.</p>
+
+    <p>The Company shall not be responsible for any errors, omissions, or inaccuracies in data, content, or information provided through the Services, or for any actions taken in reliance thereon.</p>
+
+  </div>
+
+  <div class="footer">
+    <div class="left">NightOwl Monitoring LLC &nbsp;&middot;&nbsp; nightowlmonitoring.com</div>
+    <div class="right">Page 3</div>
+  </div>
+</div>
+
+<!-- =============== PAGE 4 =============== -->
+<div class="page">
+  <div class="body">
+
+    <h2 class="section"><span class="num">14.</span>Term and Termination</h2>
+
+    <h3 class="sub">14.1 Initial Term</h3>
+    <p>The Agreement shall commence on the date the Service is first made available to the Customer and shall remain in effect for a minimum term of 12 months ("Initial Term"). During the Initial Term, the Customer agrees to pay the subscription fee as outlined in the Service agreement, regardless of usage.</p>
+
+    <h3 class="sub">14.2 Renewal and Cancellation</h3>
+    <p>After the Initial Term, the Agreement will automatically renew on a month-to-month basis unless terminated by either party. The Customer may cancel the Agreement at any time after the Initial Term by providing the Company with at least 3 months' written notice of cancellation. Subscription fees will continue to accrue and be payable during the 3-month notice period.</p>
+
+    <h3 class="sub">14.3 Termination by the Company</h3>
+    <p>The Company reserves the right to terminate the Agreement immediately for breach of these Terms or any failure by the Customer to pay fees when due.</p>
+
+    <h3 class="sub">14.4 Data Retention</h3>
+    <p>The Company may retain certain User Data for a reasonable period following termination, subject to applicable law.</p>
+
+    <h2 class="section"><span class="num">15.</span>Partner Flow-Down Requirements</h2>
+    <p>Where the Service is provided through a Partner, such Partner is responsible for ensuring that its customers are bound by terms that are consistent with and no less protective of the Company than these Terms and Conditions. The User acknowledges that certain rights, limitations, and disclaimers set forth herein are intended to extend to and benefit the Company regardless of whether access to the Service is direct or through a Partner.</p>
+
+    <h2 class="section"><span class="num">16.</span>Contact Information</h2>
+    <p>For questions or concerns regarding these Terms, please contact us at:</p>
+    <div class="contact-block">
+      <p class="company">NightOwl Monitoring LLC</p>
+      <p>185 Angel Fire Dr., Dripping Springs, TX 78620</p>
+      <p>Phone: (512) 939-6828</p>
+      <p>Email: sales@nightowlmonitoring.com</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="left">NightOwl Monitoring LLC &nbsp;&middot;&nbsp; nightowlmonitoring.com</div>
+    <div class="right">Page 4</div>
+  </div>
+</div>
+
+</body>
+</html>
