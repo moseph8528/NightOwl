@@ -553,6 +553,77 @@
         }
 
         @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .hero {
+                background: linear-gradient(135deg, var(--navy) 0%, #0d2456 100%) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .hero h1, .hero-desc {
+                color: white !important;
+            }
+
+            .hero-tagline, .hero-logo {
+                color: var(--cyan) !important;
+            }
+
+            .feature-strip {
+                background: var(--navy) !important;
+            }
+
+            .feature-strip-item strong {
+                color: var(--cyan) !important;
+            }
+
+            .feature-strip-item span {
+                color: white !important;
+            }
+
+            section h2 {
+                color: var(--navy) !important;
+            }
+
+            section h2::after {
+                background: var(--cyan) !important;
+            }
+
+            .cta-dark {
+                background: var(--navy) !important;
+                color: white !important;
+            }
+
+            .cta-dark h3 {
+                color: white !important;
+            }
+
+            .cta-dark p {
+                color: #ddd !important;
+            }
+
+            .cta-button {
+                background: var(--cyan) !important;
+                color: var(--navy) !important;
+            }
+
+            .footer {
+                background: var(--navy) !important;
+                color: white !important;
+            }
+
+            .footer-col h4 {
+                color: var(--cyan) !important;
+            }
+
+            .footer-col p, .footer-col a {
+                color: inherit !important;
+            }
+
             .pdf-button {
                 display: none;
             }
@@ -993,7 +1064,7 @@
     <!-- CTA -->
     <section class="cta-dark">
         <h3>Ready to Deploy?</h3>
-        <p>The NightOwl-Hawk combines enterprise-grade hardware with the modularity to match your exact monitoring requirements. Work with our team to design the right solution for your deployment.</p>
+        <p>The NightOwl Hawk combines enterprise-grade hardware with the modularity to match your exact monitoring requirements. Work with our team to design the right solution for your deployment.</p>
         <a href="https://nightowlmonitoring.com/contact" class="cta-button">Get Started</a>
     </section>
 
