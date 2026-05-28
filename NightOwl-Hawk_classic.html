@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NightOwl Hawk - Remote Monitoring Data Logger</title>
+    <title>NightOwl-Hawk - Remote Monitoring Data Logger</title>
     <style>
         :root {
             --navy: #071842;
@@ -382,15 +382,58 @@
         }
 
         @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
             body {
                 background: white;
+                color: var(--dark-gray);
             }
 
             @page {
                 margin: 0.5in;
             }
 
+            .header {
+                background: var(--navy) !important;
+                color: white !important;
+                border-bottom: 4px solid var(--cyan) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .header h1, .header p, .tagline, .header-intro {
+                color: white !important;
+            }
+
+            .tagline {
+                color: var(--cyan) !important;
+            }
+
+            section h2 {
+                color: var(--navy) !important;
+                border-bottom: 3px solid var(--cyan) !important;
+            }
+
+            .quick-ref {
+                background: var(--navy) !important;
+                color: white !important;
+            }
+
+            .quick-ref h3 {
+                color: var(--cyan) !important;
+            }
+
+            .quick-ref-item strong {
+                color: var(--cyan) !important;
+            }
+
             .footer {
+                background: var(--navy) !important;
+                color: white !important;
                 margin-top: 40px;
             }
 
@@ -408,8 +451,8 @@
 
 <header class="header">
     <div class="header-content">
-        <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_1_1722033363-trimmy-NightOwl-Monitoring-Logo-White.png" alt="NightOwl Monitoring Logo" class="header-logo">
-        <div class="logo">NIGHTOWL MONITORING</div>
+        <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_2_1722036423-trimmy-NightOwl-Monitoring-Logo-Color.png" alt="NightOwl Monitoring Logo" class="header-logo">
+        <!--<div class="logo">NIGHTOWL MONITORING</div>-->
         <h1>NightOwl-Hawk</h1>
         <p class="tagline">Cellular IoT Data Logger and Sensor Hub</p>
         <p class="header-intro">The Hawk is a robust, plug-and-play IoT data logger and sensor hub designed to integrate with an extensive range of sensors and monitoring applications. Available in multiple connectivity, power, and housing variations, the Hawk gives you the flexibility to build exactly the remote monitoring solution you need.</p>
@@ -776,7 +819,7 @@
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-logo">
-            <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_1_1722033363-trimmy-NightOwl-Monitoring-Logo-White.png" alt="NightOwl Monitoring Logo">
+            <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_2_1722036423-trimmy-NightOwl-Monitoring-Logo-Color.png" alt="NightOwl Monitoring Logo">
             NIGHTOWL MONITORING
         </div>
         <p><strong>NightOwl-Hawk</strong> combines the reliability of enterprise-grade IoT hardware with the flexibility of a modular architecture. Built to support your most demanding remote monitoring deployments.</p>
