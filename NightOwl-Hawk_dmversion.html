@@ -62,6 +62,13 @@
             color: var(--cyan);
         }
 
+        .hero-logo img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 15px;
+            display: block;
+        }
+
         .hero h1 {
             font-size: 56px;
             margin-bottom: 15px;
@@ -439,6 +446,13 @@
             letter-spacing: 1px;
         }
 
+        .footer-logo img {
+            max-width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+            display: block;
+        }
+
         .footer-col p {
             font-size: 14px;
             color: #bbb;
@@ -501,8 +515,45 @@
             }
         }
 
+        /* PDF Download Button */
+        .pdf-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--cyan);
+            color: var(--navy);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(74, 200, 241, 0.3);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .pdf-button:hover {
+            background: white;
+            box-shadow: 0 6px 16px rgba(74, 200, 241, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .pdf-button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .pdf-button {
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+        }
+
         @media print {
-            .hero::before {
+            .pdf-button {
                 display: none;
             }
 
@@ -517,7 +568,10 @@
 <!-- Hero Section -->
 <section class="hero">
     <div class="hero-content">
-        <div class="hero-logo">NIGHTOWL MONITORING</div>
+        <div class="hero-logo">
+            <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_2_1722036423-trimmy-NightOwl-Monitoring-Logo-Color.png" alt="NightOwl Monitoring Logo">
+            NIGHTOWL MONITORING
+        </div>
         <h1>Hawk</h1>
         <p class="hero-tagline">Cellular IoT Data Logger and Sensor Hub</p>
         <p class="hero-desc">The Hawk is a robust plug-and-play IoT data logger and sensor hub designed to support an extensive range of sensor integrations. Available in multiple connectivity, power, and housing variations, the Hawk gives you the flexibility to build your remote monitoring solution.</p>
@@ -548,7 +602,7 @@
     <!-- Product Showcase -->
     <section class="product-showcase">
         <div class="product-image">
-            <img src="https://nightowlmonitoring.com/placeholder-ultra.jpg" alt="NightOwl Hawk">
+            <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/04/Ultra-e1776361125280.webp" alt="NightOwl Hawk">
             <p style="margin-top: 15px; font-size: 13px; color: var(--text-gray);">Placeholder: NightOwl Ultra (Hawk product image pending)</p>
         </div>
         <div class="product-text">
@@ -939,7 +993,7 @@
     <!-- CTA -->
     <section class="cta-dark">
         <h3>Ready to Deploy?</h3>
-        <p>The NightOwl Hawk combines enterprise-grade hardware with the modularity to match your exact monitoring requirements. Work with our team to design the right solution for your deployment.</p>
+        <p>The NightOwl-Hawk combines enterprise-grade hardware with the modularity to match your exact monitoring requirements. Work with our team to design the right solution for your deployment.</p>
         <a href="https://nightowlmonitoring.com/contact" class="cta-button">Get Started</a>
     </section>
 
@@ -950,6 +1004,9 @@
     <div class="footer-content">
         <div class="footer-grid">
             <div class="footer-col">
+                <div class="footer-logo">
+                    <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_2_1722036423-trimmy-NightOwl-Monitoring-Logo-Color.png" alt="NightOwl Monitoring Logo">
+                </div>
                 <h4>About NightOwl</h4>
                 <p>NightOwl Monitoring delivers remote monitoring technology to water well drillers, pump companies, and water system operators across the United States. We shift operations from reactive firefighting to proactive management.</p>
             </div>
@@ -970,6 +1027,9 @@
         </div>
     </div>
 </footer>
+
+<!-- PDF Download Button -->
+<button class="pdf-button" onclick="window.print()">Print / Save as PDF</button>
 
 </body>
 </html>
