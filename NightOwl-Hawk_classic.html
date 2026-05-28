@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NightOwl-Hawk - Remote Monitoring Data Logger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy: #071842;
@@ -19,332 +20,248 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
+        html, body {
+            font-family: 'Roboto', sans-serif;
             color: var(--dark-gray);
-            background: #fff;
+            line-height: 1.5;
+            width: 8.5in;
+            margin: 0 auto;
+            background: white;
         }
 
-        /* Header */
-        .header {
+        /* PAGE STRUCTURE */
+        .page {
+            width: 8.5in;
+            height: 11in;
+            padding: 0.5in;
+            margin: 0 auto 0.5in;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            page-break-after: always;
+        }
+
+        /* HEADER */
+        .page-header {
             background: var(--navy);
             color: white;
-            padding: 40px 40px;
-            text-align: center;
+            padding: 0.3in 0.4in;
+            margin: -0.5in -0.5in 0.3in -0.5in;
             border-bottom: 4px solid var(--cyan);
         }
 
         .header-logo {
-            max-width: 180px;
+            max-width: 100px;
             height: auto;
-            margin: 0 auto 30px;
-            display: block;
+            margin-bottom: 0.15in;
         }
 
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            letter-spacing: 0.5px;
-        }
-
-        .header-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .header h1 {
-            font-size: 42px;
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .tagline {
+        .header-title {
             font-size: 18px;
-            color: var(--cyan);
-            margin-bottom: 20px;
+            font-weight: 700;
+            margin-bottom: 0.08in;
         }
 
-        .header-intro {
+        .header-subtitle {
             font-size: 14px;
-            line-height: 1.7;
-            max-width: 700px;
-            margin: 0 auto;
+            color: var(--cyan);
+            margin-bottom: 0.1in;
+        }
+
+        .header-desc {
+            font-size: 11px;
+            line-height: 1.4;
             color: #ddd;
         }
 
-        /* Container */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 40px;
+        /* CONTENT */
+        .page-content {
+            flex: 1;
+            overflow: hidden;
+            font-size: 10px;
+            line-height: 1.4;
         }
 
-        /* Product Image Section */
-        .product-image-section {
-            text-align: center;
-            margin: 15px 0;
-            padding: 15px;
+        .section {
+            margin-bottom: 0.2in;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--navy);
+            border-bottom: 2px solid var(--cyan);
+            padding-bottom: 0.05in;
+            margin-bottom: 0.1in;
+        }
+
+        .section-subtitle {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--navy);
+            margin: 0.08in 0 0.05in 0;
+        }
+
+        p {
+            margin: 0.05in 0;
+            font-size: 10px;
+        }
+
+        ul {
+            margin: 0.05in 0 0.05in 0.2in;
+            padding-left: 0.15in;
+            font-size: 10px;
+        }
+
+        li {
+            margin: 0.03in 0;
+        }
+
+        /* TABLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.08in 0;
+            font-size: 9px;
+        }
+
+        th {
+            background: var(--navy);
+            color: white;
+            padding: 0.05in 0.08in;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.04in 0.08in;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
             background: var(--light-gray);
-            border-radius: 8px;
         }
 
-        .product-image-section img {
-            max-width: 420px;
-            height: auto;
+        .col-label {
+            font-weight: 600;
+            width: 40%;
+        }
+
+        /* PRODUCT IMAGE */
+        .product-image {
+            text-align: center;
+            background: var(--light-gray);
+            padding: 0.2in;
             border-radius: 4px;
+            margin: 0.15in 0;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: 2in;
         }
 
         .image-caption {
-            margin-top: 8px;
-            font-size: 11px;
+            font-size: 8px;
             color: var(--text-gray);
+            margin-top: 0.05in;
             font-style: italic;
         }
 
-        /* Section Styles */
-        section {
-            margin: 40px 0;
-        }
-
-        section h2 {
-            font-size: 32px;
-            color: var(--navy);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--cyan);
-        }
-
-        section h3 {
-            font-size: 20px;
-            color: var(--navy);
-            margin: 30px 0 15px 0;
-        }
-
-        section p {
-            margin: 15px 0;
-            line-height: 1.8;
-            color: var(--text-gray);
-        }
-
-        /* Features Grid */
-        .features-grid {
+        /* FEATURE GRID */
+        .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin: 30px 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.15in;
+            margin: 0.1in 0;
         }
 
         .feature-card {
             background: var(--light-gray);
-            padding: 25px;
-            border-radius: 6px;
-            border-left: 4px solid var(--cyan);
+            padding: 0.1in;
+            border-left: 3px solid var(--cyan);
+            font-size: 9px;
         }
 
-        .feature-card h4 {
+        .feature-card strong {
             color: var(--navy);
-            margin-bottom: 10px;
-            font-size: 16px;
+            display: block;
+            margin-bottom: 0.03in;
+            font-size: 10px;
         }
 
         .feature-card p {
-            font-size: 14px;
-            line-height: 1.7;
+            font-size: 8px;
+            margin: 0.02in 0;
         }
 
-        /* Spec Table */
-        .specs-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 30px 0;
-        }
-
-        .specs-table th {
-            background: var(--navy);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            border: none;
-        }
-
-        .specs-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .specs-table tr:nth-child(even) {
-            background: var(--light-gray);
-        }
-
-        .specs-table tr:hover {
-            background: #f0f0f0;
-        }
-
-        .spec-label {
-            font-weight: 600;
-            color: var(--navy);
-            width: 40%;
-        }
-
-        /* Connectivity Section */
-        .connectivity-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .option-box {
-            background: white;
-            border: 2px solid var(--cyan);
-            padding: 25px;
-            border-radius: 6px;
-        }
-
-        .option-box h4 {
-            color: var(--navy);
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-
-        .option-box ul {
-            margin-left: 20px;
-        }
-
-        .option-box li {
-            margin: 8px 0;
-            color: var(--text-gray);
-        }
-
-        /* Quick Reference */
+        /* QUICK REFERENCE */
         .quick-ref {
             background: var(--navy);
             color: white;
-            padding: 40px;
-            border-radius: 6px;
-            margin: 40px 0;
+            padding: 0.15in;
+            border-radius: 3px;
+            font-size: 9px;
+            margin: 0.15in 0;
         }
 
-        .quick-ref h3 {
-            color: var(--cyan);
-            margin-bottom: 20px;
-        }
-
-        .quick-ref-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-        }
-
-        .quick-ref-item {
-            border-right: 1px solid rgba(74, 200, 241, 0.3);
-            padding-right: 30px;
-        }
-
-        .quick-ref-item:last-child {
-            border-right: none;
-        }
-
-        .quick-ref-item strong {
+        .quick-ref strong {
             color: var(--cyan);
             display: block;
-            margin-bottom: 5px;
+            margin-top: 0.08in;
+            margin-bottom: 0.03in;
         }
 
-        /* Footer */
-        .footer {
+        .quick-ref strong:first-child {
+            margin-top: 0;
+        }
+
+        /* FOOTER */
+        .page-footer {
             background: var(--navy);
             color: white;
-            padding: 40px;
+            padding: 0.25in 0.4in;
+            margin: 0.2in -0.5in -0.5in -0.5in;
+            font-size: 8px;
+            line-height: 1.3;
             text-align: center;
-            margin-top: 80px;
-        }
-
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .footer-logo {
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        .footer-logo img {
-            max-width: 120px;
+            max-width: 60px;
             height: auto;
-            margin-bottom: 10px;
-            display: block;
+            margin: 0 auto 0.08in;
         }
 
-        .footer p {
-            font-size: 13px;
-            line-height: 1.8;
+        .footer-text {
             color: #bbb;
-            margin: 10px 0;
+            margin: 0.03in 0;
         }
 
-        .footer-links {
-            margin: 20px 0;
-            font-size: 13px;
+        .footer-text strong {
+            color: white;
         }
 
-        .footer-links a {
+        .footer-text a {
             color: var(--cyan);
             text-decoration: none;
-            margin: 0 15px;
         }
 
-        .footer-links a:hover {
-            text-decoration: underline;
+        /* CTA BUTTON */
+        .cta-button {
+            display: inline-block;
+            background: var(--navy);
+            color: white;
+            padding: 0.08in 0.2in;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 10px;
+            margin-top: 0.08in;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px 20px;
-            }
-
-            .header h1 {
-                font-size: 36px;
-            }
-
-            .header-intro {
-                font-size: 14px;
-            }
-
-            section h2 {
-                font-size: 26px;
-            }
-
-            .specs-table {
-                font-size: 13px;
-            }
-
-            .specs-table th, .specs-table td {
-                padding: 10px;
-            }
-
-            .quick-ref-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .quick-ref-item {
-                border-right: none;
-                border-bottom: 1px solid rgba(74, 200, 241, 0.3);
-                padding-right: 0;
-                padding-bottom: 20px;
-            }
-
-            .product-image-section img {
-                max-width: 100%;
-            }
-        }
-
-        /* PDF Download Button */
+        /* PRINT DOWNLOAD BUTTON */
         .pdf-button {
             position: fixed;
             bottom: 30px;
@@ -358,91 +275,39 @@
             cursor: pointer;
             font-size: 14px;
             box-shadow: 0 4px 12px rgba(74, 200, 241, 0.3);
-            transition: all 0.3s;
             z-index: 1000;
         }
 
         .pdf-button:hover {
             background: white;
             box-shadow: 0 6px 16px rgba(74, 200, 241, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .pdf-button:active {
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .pdf-button {
-                bottom: 20px;
-                right: 20px;
-                padding: 10px 16px;
-                font-size: 12px;
-            }
         }
 
         @media print {
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
-                color-adjust: exact !important;
-            }
-
-            html, body {
-                width: 100%;
-                margin: 0;
-                padding: 0;
             }
 
             body {
-                background: white;
-                color: var(--dark-gray);
+                width: 100%;
+                margin: 0;
             }
 
-            .header {
-                background: var(--navy) !important;
-                color: white !important;
-                border-bottom: 4px solid var(--cyan) !important;
-                padding: 30px 40px;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            .page {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0.5in;
+                page-break-after: always;
             }
 
-            .container {
-                padding: 0 40px 40px 40px;
+            .page-header {
+                margin: -0.5in -0.5in 0.3in -0.5in;
             }
 
-            .header h1, .header p, .tagline, .header-intro {
-                color: white !important;
-            }
-
-            .tagline {
-                color: var(--cyan) !important;
-            }
-
-            section h2 {
-                color: var(--navy) !important;
-                border-bottom: 3px solid var(--cyan) !important;
-            }
-
-            .quick-ref {
-                background: var(--navy) !important;
-                color: white !important;
-            }
-
-            .quick-ref h3 {
-                color: var(--cyan) !important;
-            }
-
-            .quick-ref-item strong {
-                color: var(--cyan) !important;
-            }
-
-            .footer {
-                background: var(--navy) !important;
-                color: white !important;
-                padding: 40px;
-                margin: 40px 0 0 0;
+            .page-footer {
+                margin: 0.2in -0.5in -0.5in -0.5in;
             }
 
             .pdf-button {
@@ -457,391 +322,326 @@
 </head>
 <body>
 
-<header class="header">
-    <div class="header-content">
-        <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_1_1722033363-trimmy-NightOwl-Monitoring-Logo-White.png" alt="NightOwl Monitoring Logo" class="header-logo">
-        <div class="logo">NIGHTOWL MONITORING</div>
-        <h1>NightOwl-Hawk</h1>
-        <p class="tagline">Cellular IoT Data Logger and Sensor Hub</p>
-        <p class="header-intro">The Hawk is a robust, plug-and-play IoT data logger and sensor hub designed to integrate with an extensive range of sensors and monitoring applications. Available in multiple connectivity, power, and housing variations, the Hawk gives you the flexibility to build exactly the remote monitoring solution you need.</p>
-    </div>
-</header>
-
-<div class="container">
-
-    <!-- Product Image -->
-    <div class="product-image-section">
-        <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/04/Ultra-e1776361125280.webp" alt="NightOwl-Hawk Data Logger">
-        <p class="image-caption">Placeholder: NightOwl Ultra image (Hawk product image pending)</p>
+<!-- PAGE 1: HERO & OVERVIEW -->
+<div class="page">
+    <div class="page-header">
+        <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_1_1722033363-trimmy-NightOwl-Monitoring-Logo-White.png" alt="NightOwl Logo" class="header-logo">
+        <div class="header-title">NightOwl-Hawk</div>
+        <div class="header-subtitle">Cellular IoT Data Logger and Sensor Hub</div>
+        <div class="header-desc">The Hawk is a robust, plug-and-play IoT data logger and sensor hub designed to integrate with an extensive range of sensors and monitoring applications. Available in multiple connectivity, power, and housing variations, the Hawk gives you the flexibility to build exactly the remote monitoring solution you need.</div>
     </div>
 
-    <!-- Overview -->
-    <section>
-        <h2>Overview</h2>
-        <p>The Hawk is purpose-built for remote monitoring deployments where flexibility and reliability matter. Whether you need to monitor water systems, environmental sensors, or equipment-level metrics, the Hawk adapts to your requirements.</p>
-        <p><strong>Key advantages:</strong></p>
-        <ul style="margin-left: 20px; margin-top: 15px;">
-            <li><strong>Modular I/O Architecture:</strong> Plug-in interface cards let you choose exactly which sensor protocols you need</li>
-            <li><strong>Multiple Power Options:</strong> LiPo battery, external power, solar integration, or dual D Cell batteries</li>
-            <li><strong>Secure Connectivity:</strong> LTE-M and NB-IoT cellular, with IoT Satellite version planned</li>
-            <li><strong>Remote Device Management:</strong> Configure, update, and troubleshoot devices over the air</li>
-            <li><strong>Enterprise-Grade Security:</strong> Military-level AES-256 encryption end-to-end</li>
-            <li><strong>Field-Ready Housing:</strong> IP68 waterproof, IK08 impact-rated, GORE vents for pressure equalization</li>
-        </ul>
-    </section>
-
-    <!-- Core Specs -->
-    <section>
-        <h2>Specifications</h2>
-
-        <h3>Connectivity</h3>
-        <table class="specs-table">
-            <tr>
-                <th>Feature</th>
-                <th>Detail</th>
-            </tr>
-            <tr>
-                <td class="spec-label">Cellular Standards</td>
-                <td>LTE-M (Cat-M1) and NB-IoT (Cat-NB1/NB2)</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Cellular Modem</td>
-                <td>Nordic nRF9160</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Supported LTE Bands</td>
-                <td>B1, B2, B3, B4, B5, B8, B12, B13, B14, B17, B18, B19, B20, B25, B26, B28, B66</td>
-            </tr>
-            <tr>
-                <td class="spec-label">SIM</td>
-                <td>Internal Micro 3FF, Auto-APN selection</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Antennas</td>
-                <td>Internal cellular and GPS; external antenna support for extended range</td>
-            </tr>
-        </table>
-
-        <h3>Location and Navigation</h3>
-        <table class="specs-table">
-            <tr>
-                <th>Feature</th>
-                <th>Detail</th>
-            </tr>
-            <tr>
-                <td class="spec-label">GNSS</td>
-                <td>GPS (Nordic nRF9160 module)</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Location Accuracy</td>
-                <td>~3m CEP, 50%, GPS, open sky conditions</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Assistance</td>
-                <td>GPS predicted ephemeris data for improved sensitivity and accuracy</td>
-            </tr>
-        </table>
-
-        <h3>Onboard Sensors and Features</h3>
-        <table class="specs-table">
-            <tr>
-                <th>Feature</th>
-                <th>Detail</th>
-            </tr>
-            <tr>
-                <td class="spec-label">Accelerometer</td>
-                <td>3-axis (tamper detection, planned in future firmware)</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Temperature Monitoring</td>
-                <td>Onboard sensor reports internal temperature; external sensor recommended for precision</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Voltage Monitoring</td>
-                <td>LiPo battery and external power readings; Battery Low and Power Loss alerts</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Flash Memory</td>
-                <td>Stores months of records during cellular outages</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Diagnostics</td>
-                <td>2 diagnostic LEDs and push button for testing and status indication</td>
-            </tr>
-        </table>
-
-        <h3>Operating Environment</h3>
-        <table class="specs-table">
-            <tr>
-                <th>Feature</th>
-                <th>Detail</th>
-            </tr>
-            <tr>
-                <td class="spec-label">Temperature Range</td>
-                <td>-30°C to +60°C (-22°F to +140°F)</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Battery Charging</td>
-                <td>LiPo charger disabled below -10°C and above +45°C for safety</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Safety</td>
-                <td>Self-resetting fuse for simplified and safe installation</td>
-            </tr>
-        </table>
-    </section>
-
-    <!-- Power Options -->
-    <section>
-        <h2>Power Options</h2>
-        <p>The Hawk supports three distinct power configurations, allowing you to match your deployment environment and maintenance budget.</p>
-
-        <div class="connectivity-options">
-            <div class="option-box">
-                <h4>Rechargeable LiPo Battery</h4>
-                <ul>
-                    <li>3500mAh internal LiPo</li>
-                    <li>Supports full-season deployments</li>
-                    <li>Onboard charger with selectable charge rates</li>
-                    <li>Optional external power (6-28V) or solar integration</li>
-                </ul>
-            </div>
-
-            <div class="option-box">
-                <h4>D Cell LTC Battery Pack</h4>
-                <ul>
-                    <li>2 x D Cell Lithium Thionyl Chloride (LTC) batteries</li>
-                    <li>Completely self-powered, no external charging</li>
-                    <li>Extended field life for remote deployments</li>
-                    <li>User-replaceable batteries</li>
-                </ul>
-            </div>
-
-            <div class="option-box">
-                <h4>External Power</h4>
-                <ul>
-                    <li>Input range: 6-28V DC (12V+ recommended for high load)</li>
-                    <li>Integrated solar panel support</li>
-                    <li>Continuous operation capability</li>
-                    <li>Self-resetting fuse for protection</li>
-                </ul>
-            </div>
+    <div class="page-content">
+        <div class="product-image">
+            <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/04/Ultra-e1776361125280.webp" alt="NightOwl Hawk">
+            <div class="image-caption">Placeholder: NightOwl Ultra (Hawk product image pending)</div>
         </div>
-    </section>
 
-    <!-- I/O Interface -->
-    <section>
-        <h2>Input/Output Interface</h2>
-        <p>The Hawk's sensor interfaces are managed by plug-in I/O cards, giving you unlimited flexibility to add the protocols and sensor types your application requires. Nine total I/O slots support a wide range of standard communication protocols and power options.</p>
-
-        <h3>Onboard Digital Interface</h3>
-        <table class="specs-table">
-            <tr>
-                <th>Feature</th>
-                <th>Detail</th>
-            </tr>
-            <tr>
-                <td class="spec-label">Digital Input</td>
-                <td>1x with configurable pull-up/pull-down; 0-40V DC range; pulse counting to 40MHz</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Thresholds</td>
-                <td>ON > 2V, OFF < 1V</td>
-            </tr>
-        </table>
-
-        <h3>Available I/O Cards</h3>
-        <p>Choose one or more cards to build your sensor stack:</p>
-        <div class="features-grid">
-            <div class="feature-card">
-                <h4>AgTech1 Card</h4>
-                <p>1x Digital Input, 1x 4-20mA, SDI-12, I2C, 1-Wire/iButton, switched power (3.3V, 5V, 12V)</p>
-            </div>
-            <div class="feature-card">
-                <h4>AgTech2 Card</h4>
-                <p>4x Analog Inputs (0-30V), SDI-12, 1-Wire, switched power (3.3V, 5V, 12V)</p>
-            </div>
-            <div class="feature-card">
-                <h4>RS-1 Card</h4>
-                <p>RS485, 1x Analog Input (0-30V), 1x 4-20mA, 1-Wire, switched power</p>
-            </div>
-            <div class="feature-card">
-                <h4>Serial Card</h4>
-                <p>RS-232 TX/RX, TTL TX/RX, 2x Digital Inputs, switched power</p>
-            </div>
-            <div class="feature-card">
-                <h4>Digital Card</h4>
-                <p>2x Analog Inputs (0-30V), 5x Digital Inputs, max 40Hz pulse counting</p>
-            </div>
-            <div class="feature-card">
-                <h4>Bluetooth+ Card</h4>
-                <p>Full I/O plus integrated Bluetooth module (BGM240PA22VNA3)</p>
-            </div>
+        <div class="section">
+            <div class="section-title">Overview</div>
+            <p>The Hawk is purpose-built for remote monitoring deployments where flexibility and reliability matter. Whether you need to monitor water systems, environmental sensors, or equipment-level metrics, the Hawk adapts to your requirements.</p>
+            
+            <div class="section-subtitle">Key Advantages:</div>
+            <ul>
+                <li><strong>Modular I/O Architecture:</strong> Plug-in interface cards let you choose exactly which sensor protocols you need</li>
+                <li><strong>Multiple Power Options:</strong> LiPo battery, external power, solar integration, or dual D Cell batteries</li>
+                <li><strong>Secure Connectivity:</strong> LTE-M and NB-IoT cellular, with IoT Satellite version planned</li>
+                <li><strong>Remote Device Management:</strong> Configure, update, and troubleshoot devices over the air</li>
+            </ul>
         </div>
-    </section>
 
-    <!-- Housing Options -->
-    <section>
-        <h2>Housing Options</h2>
-        <p>The Hawk is available in two rugged housing configurations, both IP68 waterproof and IK08 impact-rated, with GORE vents for pressure equalization. Non-branded enclosures support optional white labeling.</p>
-
-        <div class="connectivity-options">
-            <div class="option-box">
-                <h4>HawkLipo Housing</h4>
-                <ul>
-                    <li><strong>Dimensions:</strong> 185 x 150 x 30 mm (7.3 x 5.9 x 1.2")</li>
-                    <li>Houses PCB, I/O Card, and 3500mAh LiPo battery</li>
-                    <li>IP68 waterproof, IK08 impact-rated</li>
-                    <li>GORE vent for pressure equalization</li>
-                    <li>Multiple mounting options (screws, bolts, cable ties, rivets)</li>
-                    <li>2 cable glands for waterproof cable entry</li>
-                </ul>
-            </div>
-
-            <div class="option-box">
-                <h4>Hawk2D Housing</h4>
-                <ul>
-                    <li><strong>Dimensions:</strong> 180 x 119 x 39 mm (7.1 x 4.7 x 1.5")</li>
-                    <li>Houses PCB, I/O Card, and 2 x D Cell LTC batteries</li>
-                    <li>IP68 waterproof, IK08 impact-rated</li>
-                    <li>GORE vent for pressure equalization</li>
-                    <li>Multiple mounting options (screws, bolts, cable ties, rivets)</li>
-                    <li>2 cable glands for waterproof cable entry</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Device Management -->
-    <section>
-        <h2>Device Management and Configuration</h2>
-
-        <h3>Remote Operations</h3>
-        <table class="specs-table">
-            <tr>
-                <th>Capability</th>
-                <th>Detail</th>
-            </tr>
-            <tr>
-                <td class="spec-label">Configuration</td>
-                <td>Remote over-the-air (OTA) sensor and position update rates, task scheduling, and more</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Management Platform</td>
-                <td>Cloud-based Device Manager: manage, monitor, configure, debug, update, and restart devices</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Configuration Tool</td>
-                <td>DM-Link provisioning app</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Firmware Updates</td>
-                <td>Remote OTA firmware updates for all devices in your fleet</td>
-            </tr>
-        </table>
-
-        <h3>Task Management</h3>
-        <p>Powerful onboard task management lets you schedule jobs or trigger responses based on sensor thresholds and events, even when cellular coverage is unavailable. Store and forward functionality ensures no data is lost.</p>
-
-        <h3>Third-Party Integration</h3>
-        <table class="specs-table">
-            <tr>
-                <th>Method</th>
-                <th>Detail</th>
-            </tr>
-            <tr>
-                <td class="spec-label">TCP Direct</td>
-                <td>Direct TCP connection for real-time data push</td>
-            </tr>
-            <tr>
-                <td class="spec-label">HTTPS Webhook</td>
-                <td>Webhook integration for cloud systems and APIs</td>
-            </tr>
-        </table>
-    </section>
-
-    <!-- Security -->
-    <section>
-        <h2>Security and Compliance</h2>
-
-        <h3>Data Protection</h3>
-        <p>Military-level AES-256 encryption protects data from device to Device Manager. All third-party data forwarding is sent via HTTPS for end-to-end security.</p>
-
-        <h3>Warranty and Support</h3>
-        <table class="specs-table">
-            <tr>
-                <th>Item</th>
-                <th>Detail</th>
-            </tr>
-            <tr>
-                <td class="spec-label">Manufacturer Warranty</td>
-                <td>Two years. Exclusions apply; see terms for details.</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Note</td>
-                <td>Certifications are not valid if using the Hawk without a Digital Matter housing or with an external antenna. Check Digital Matter's knowledge base for regulatory and network certifications.</td>
-            </tr>
-        </table>
-    </section>
-
-    <!-- Quick Reference -->
-    <div class="quick-ref">
-        <h3>Quick Reference</h3>
-        <div class="quick-ref-grid">
-            <div class="quick-ref-item">
-                <strong>Connectivity</strong>
-                LTE-M, NB-IoT<br>GPS Built-in
-            </div>
-            <div class="quick-ref-item">
-                <strong>I/O Capacity</strong>
-                9 Input/Output<br>Configurable Slots
-            </div>
-            <div class="quick-ref-item">
-                <strong>Power Options</strong>
-                LiPo, D Cell,<br>External Power
-            </div>
-            <div class="quick-ref-item">
-                <strong>Temperature Range</strong>
-                -30°C to +60°C<br>Field Rated
-            </div>
-            <div class="quick-ref-item">
-                <strong>Housing Rating</strong>
-                IP68, IK08<br>GORE Vented
-            </div>
-            <div class="quick-ref-item">
-                <strong>Security</strong>
-                AES-256<br>Encryption
-            </div>
+        <div class="section">
+            <div class="section-title">Connectivity</div>
+            <table>
+                <tr>
+                    <th colspan="2">LTE-M and NB-IoT</th>
+                </tr>
+                <tr>
+                    <td class="col-label">Standards</td>
+                    <td>LTE-M (Cat-M1), NB-IoT (Cat-NB1/NB2)</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Modem</td>
+                    <td>Nordic nRF9160</td>
+                </tr>
+                <tr>
+                    <td class="col-label">SIM</td>
+                    <td>Internal Micro 3FF, Auto-APN</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Antennas</td>
+                    <td>Internal cellular + GPS; external antenna support</td>
+                </tr>
+            </table>
         </div>
     </div>
 
-    <!-- CTA -->
-    <section style="text-align: center; padding: 60px 40px; background: var(--light-gray); border-radius: 6px; margin-bottom: 60px;">
-        <h3 style="font-size: 24px; color: var(--navy); margin-bottom: 20px;">Ready to Deploy Remote Monitoring?</h3>
-        <p style="margin-bottom: 30px; color: var(--text-gray);">The NightOwl-Hawk gives you the flexibility and reliability field operations demand. Contact our team to discuss your monitoring requirements and find the right configuration for your deployment.</p>
-        <a href="https://nightowlmonitoring.com/contact" style="display: inline-block; background: var(--navy); color: white; padding: 14px 40px; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background 0.3s;">Get in Touch</a>
-    </section>
-
+    <div class="page-footer">
+        <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_1_1722033363-trimmy-NightOwl-Monitoring-Logo-White.png" alt="NightOwl Logo" class="footer-logo">
+        <div class="footer-text"><strong>NightOwl-Hawk</strong></div>
+        <div class="footer-text">Remote Monitoring & Intelligence Platform</div>
+    </div>
 </div>
 
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-logo">
-            <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_1_1722033363-trimmy-NightOwl-Monitoring-Logo-White.png" alt="NightOwl Monitoring Logo">
-            NIGHTOWL MONITORING
-        </div>
-        <p><strong>NightOwl-Hawk</strong> combines the reliability of enterprise-grade IoT hardware with the flexibility of a modular architecture. Built to support your most demanding remote monitoring deployments.</p>
-        <p><strong>Technical specifications</strong> are based on Digital Matter Hawk documentation. For the latest information, visit <a href="https://www.digitalmatter.com">www.digitalmatter.com</a>.</p>
-        <div class="footer-links">
-            <a href="https://nightowlmonitoring.com">Home</a>
-            <a href="https://nightowlmonitoring.com/contact">Contact</a>
-            <a href="https://nightowlmonitoring.com/privacy">Privacy</a>
-        </div>
-        <p style="margin-top: 20px; font-size: 12px;">Copyright © 2026 NightOwl Monitoring LLC. All rights reserved.</p>
+<!-- PAGE 2: SPECIFICATIONS -->
+<div class="page">
+    <div class="page-header">
+        <div class="header-title">NightOwl-Hawk</div>
+        <div class="header-subtitle">Technical Specifications</div>
     </div>
-</footer>
 
-<!-- PDF Download Button -->
+    <div class="page-content">
+        <div class="section">
+            <div class="section-title">Location & Navigation</div>
+            <table>
+                <tr>
+                    <td class="col-label">GNSS</td>
+                    <td>GPS (Nordic nRF9160)</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Accuracy</td>
+                    <td>~3m CEP (50%), GPS, open sky</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Assistance</td>
+                    <td>GPS ephemeris prediction</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Onboard Sensors & Features</div>
+            <table>
+                <tr>
+                    <td class="col-label">Accelerometer</td>
+                    <td>3-axis (tamper detection)</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Temperature</td>
+                    <td>Onboard + external option</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Voltage Monitor</td>
+                    <td>Battery + external power readings</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Flash Memory</td>
+                    <td>Months of offline storage</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Diagnostics</td>
+                    <td>2 LEDs + push button</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Operating Environment</div>
+            <table>
+                <tr>
+                    <td class="col-label">Temperature Range</td>
+                    <td>-30°C to +60°C</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Battery Charging</td>
+                    <td>Disabled below -10°C, above +45°C</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Safety</td>
+                    <td>Self-resetting fuse</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Power Options</div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <strong>Rechargeable LiPo</strong>
+                    <p>3500mAh internal battery. Supports full-season deployments. Optional external power (6-28V) or solar integration.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>D Cell LTC Pack</strong>
+                    <p>2x D Cell Lithium Thionyl Chloride. Completely self-powered. Extended field life. User-replaceable.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>External Power</strong>
+                    <p>Input range 6-28V DC. Continuous operation. Solar compatible. Self-resetting fuse protection.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <div class="footer-text">Page 2 of 4</div>
+    </div>
+</div>
+
+<!-- PAGE 3: I/O & HOUSING -->
+<div class="page">
+    <div class="page-header">
+        <div class="header-title">NightOwl-Hawk</div>
+        <div class="header-subtitle">I/O Interface & Housing</div>
+    </div>
+
+    <div class="page-content">
+        <div class="section">
+            <div class="section-title">Input/Output Interface</div>
+            <p>Nine total I/O slots support unlimited flexibility. Plug-in cards manage sensor interfaces. All cards support flexible power delivery (3.3V, 5V, 12V).</p>
+            
+            <div class="section-subtitle">Onboard Digital</div>
+            <table>
+                <tr>
+                    <td class="col-label">Digital Input</td>
+                    <td>1x configurable pull-up/down; 0-40V DC; pulse counting to 40MHz</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Thresholds</td>
+                    <td>ON > 2V, OFF < 1V</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-subtitle">Available I/O Cards</div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <strong>AgTech1</strong>
+                    <p>1x Digital Input, 1x 4-20mA, SDI-12, I2C, 1-Wire/iButton</p>
+                </div>
+                <div class="feature-card">
+                    <strong>AgTech2</strong>
+                    <p>4x Analog Inputs (0-30V), SDI-12, 1-Wire</p>
+                </div>
+                <div class="feature-card">
+                    <strong>RS-1</strong>
+                    <p>RS485, 1x Analog Input, 1x 4-20mA, 1-Wire</p>
+                </div>
+                <div class="feature-card">
+                    <strong>Serial</strong>
+                    <p>RS-232 TX/RX, TTL TX/RX, 2x Digital Inputs</p>
+                </div>
+                <div class="feature-card">
+                    <strong>Digital</strong>
+                    <p>2x Analog Inputs, 5x Digital Inputs, pulse counting</p>
+                </div>
+                <div class="feature-card">
+                    <strong>Bluetooth+</strong>
+                    <p>Full I/O + Bluetooth module (BGM240PA22VNA3)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Housing Options</div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <strong>HawkLipo</strong>
+                    <p><strong>Dimensions:</strong> 185 x 150 x 30 mm. Houses PCB, I/O Card, 3500mAh LiPo. IP68/IK08 rated. GORE vent. Multiple mounting options.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>Hawk2D</strong>
+                    <p><strong>Dimensions:</strong> 180 x 119 x 39 mm. Houses PCB, I/O Card, 2x D Cell. IP68/IK08 rated. GORE vent. Multiple mounting options.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <div class="footer-text">Page 3 of 4</div>
+    </div>
+</div>
+
+<!-- PAGE 4: MANAGEMENT & SECURITY -->
+<div class="page">
+    <div class="page-header">
+        <div class="header-title">NightOwl-Hawk</div>
+        <div class="header-subtitle">Device Management & Security</div>
+    </div>
+
+    <div class="page-content">
+        <div class="section">
+            <div class="section-title">Remote Operations</div>
+            <table>
+                <tr>
+                    <td class="col-label">OTA Configuration</td>
+                    <td>Remote updates to sensor rates, position frequency, task scheduling</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Management Platform</td>
+                    <td>Cloud-based Device Manager for full fleet control</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Firmware Updates</td>
+                    <td>Remote OTA updates to entire device fleet</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Configuration Tool</td>
+                    <td>DM-Link provisioning app</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Task Management & Integration</div>
+            <p>Powerful onboard task management allows scheduling jobs or triggering responses based on sensor thresholds and events, even without cellular coverage. Store-and-forward functionality ensures no data is lost.</p>
+            
+            <table>
+                <tr>
+                    <td class="col-label">TCP Direct</td>
+                    <td>Real-time data push</td>
+                </tr>
+                <tr>
+                    <td class="col-label">HTTPS Webhook</td>
+                    <td>Cloud-native API integration</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Security & Compliance</div>
+            <table>
+                <tr>
+                    <td class="col-label">Encryption</td>
+                    <td>Military-level AES-256 end-to-end</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Transport</td>
+                    <td>HTTPS for all third-party forwarding</td>
+                </tr>
+                <tr>
+                    <td class="col-label">Warranty</td>
+                    <td>Two years manufacturer warranty</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <div class="quick-ref">
+                <strong>Connectivity:</strong> LTE-M, NB-IoT, GPS Built-in
+                <strong>I/O Capacity:</strong> 9 Configurable Slots
+                <strong>Power:</strong> LiPo, D Cell, External
+                <strong>Temperature:</strong> -30°C to +60°C
+                <strong>Housing:</strong> IP68, IK08, GORE Vented
+                <strong>Security:</strong> AES-256 Encryption
+            </div>
+        </div>
+
+        <div class="section" style="margin-top: 0.25in;">
+            <p style="text-align: center; margin-top: 0.1in;">
+                <a href="https://nightowlmonitoring.com/contact" class="cta-button">Get in Touch</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <div class="footer-text"><strong>NightOwl-Hawk</strong> combines enterprise-grade IoT hardware with modular flexibility for demanding remote monitoring deployments.</div>
+        <div class="footer-text">Technical specs based on Digital Matter Hawk documentation. Visit <a href="https://www.digitalmatter.com">www.digitalmatter.com</a> for details.</div>
+        <div class="footer-text" style="margin-top: 0.08in;">Copyright © 2026 NightOwl Monitoring LLC. All rights reserved.</div>
+    </div>
+</div>
+
+<!-- PDF BUTTON -->
 <button class="pdf-button" onclick="window.print()">Print / Save as PDF</button>
 
 </body>
