@@ -12,6 +12,11 @@
             --light-gray: #f5f5f5;
             --dark-gray: #333;
             --text-gray: #555;
+            
+            /* IMAGE SIZING CONTROLS - Adjust these to change product image appearance */
+            --product-image-max-height: 2.6in;  /* Increase/decrease for larger/smaller image (was 2in) */
+            --product-image-padding: 0.15in;    /* Padding inside gray box */
+            --product-image-margin: 0.12in 0;   /* Margin above/below image */
         }
 
         * {
@@ -152,15 +157,15 @@
         .product-image {
             text-align: center;
             background: var(--light-gray);
-            padding: 0.2in;
+            padding: var(--product-image-padding);
             border-radius: 4px;
-            margin: 0.15in 0;
+            margin: var(--product-image-margin);
         }
 
         .product-image img {
             max-width: 100%;
             height: auto;
-            max-height: 2in;
+            max-height: var(--product-image-max-height);
         }
 
         .image-caption {
@@ -343,7 +348,7 @@
 
     <div class="page-content">
         <div class="product-image">
-            <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl-Hawk">
+            <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl Hawk">
             <div class="image-caption">Placeholder: NightOwl Ultra (Hawk product image pending)</div>
         </div>
 
