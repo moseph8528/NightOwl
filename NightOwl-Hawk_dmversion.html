@@ -13,6 +13,11 @@
             --dark-gray: #333;
             --text-gray: #555;
             --bg-dark: #0a0e2e;
+            
+            /* IMAGE SIZING CONTROLS - Adjust these to change product image appearance */
+            --product-image-max-height: 2.6in;  /* Increase/decrease for larger/smaller image (was 2in) */
+            --product-image-padding: 0.15in;    /* Padding inside gray box */
+            --product-image-margin: 0.12in 0;   /* Margin above/below image */
         }
 
         * {
@@ -231,13 +236,13 @@
         /* PRODUCT IMAGE */
         .product-image {
             text-align: center;
-            margin: 0.12in 0;
+            margin: var(--product-image-margin);
         }
 
         .product-image img {
             max-width: 100%;
             height: auto;
-            max-height: 1.8in;
+            max-height: var(--product-image-max-height);
         }
 
         /* QUICK REFERENCE */
