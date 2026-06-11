@@ -18,6 +18,7 @@
             --product-image-max-height: 2.6in;  /* Increase/decrease for larger/smaller image (was 2in) */
             --product-image-padding: 0.15in;    /* Padding inside gray box */
             --product-image-margin: 0.12in 0;   /* Margin above/below image */
+            --product-image-gap: 0.12in;        /* Gap between the three image columns */
         }
 
         * {
@@ -54,6 +55,11 @@
             color: white;
             padding: 0.4in;
             border-bottom: 3px solid var(--cyan);
+        }
+
+        /* Compact hero variant for the merged specs page */
+        .hero.hero-tight {
+            padding: 0.22in 0.4in;
         }
 
         .hero-logo {
@@ -204,12 +210,33 @@
             width: 38%;
         }
 
+        /* TWO-COLUMN SECTION LAYOUT (for merged specs page) */
+        .section-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.25in;
+            margin-bottom: 0.18in;
+        }
+
+        .section-row .section {
+            margin-bottom: 0;
+        }
+
         /* FEATURE CARDS */
         .feature-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.12in;
             margin: 0.08in 0;
+        }
+
+        /* Column overrides used on the merged specs page to save vertical space */
+        .feature-cards.cards-3col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .feature-cards.cards-4col {
+            grid-template-columns: repeat(4, 1fr);
         }
 
         .card {
@@ -233,13 +260,32 @@
             line-height: 1.3;
         }
 
-        /* PRODUCT IMAGE */
+        /* PRODUCT IMAGE (single - legacy) */
         .product-image {
             text-align: center;
             margin: var(--product-image-margin);
         }
 
         .product-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: var(--product-image-max-height);
+        }
+
+        /* PRODUCT IMAGE GRID (three side by side) */
+        .product-image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: var(--product-image-gap);
+            margin: var(--product-image-margin);
+            align-items: center;
+        }
+
+        .product-image-cell {
+            text-align: center;
+        }
+
+        .product-image-cell img {
             max-width: 100%;
             height: auto;
             max-height: var(--product-image-max-height);
@@ -397,8 +443,18 @@
     </div>
 
     <div class="page-content">
-        <div class="product-image">
-            <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl-Hawk">
+        <!-- THREE-COLUMN PRODUCT IMAGES -->
+        <!-- Swap the three src URLs below when final images are ready -->
+        <div class="product-image-grid">
+            <div class="product-image-cell">
+                <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl-Hawk">
+            </div>
+            <div class="product-image-cell">
+                <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl-Hawk">
+            </div>
+            <div class="product-image-cell">
+                <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl-Hawk">
+            </div>
         </div>
 
         <div class="section">
@@ -420,61 +476,64 @@
     </div>
 </div>
 
-<!-- PAGE 2: SPECS & POWER -->
+<!-- PAGE 2: SPECIFICATIONS, I/O & HOUSING (merged) -->
 <div class="page">
-    <div class="hero">
+    <div class="hero hero-tight">
         <div class="hero-brand">NIGHTOWL MONITORING</div>
-        <h1 style="font-size: 18px; margin: 0.08in 0;">Specifications</h1>
+        <h1 style="font-size: 18px; margin: 0.08in 0;">Specifications &amp; Hardware</h1>
     </div>
 
     <div class="page-content">
-        <div class="section">
-            <div class="section-title">Connectivity</div>
-            <table>
-                <tr>
-                    <td class="col-label">Standards</td>
-                    <td>LTE-M (Cat-M1), NB-IoT (Cat-NB1/NB2)</td>
-                </tr>
-                <tr>
-                    <td class="col-label">Modem</td>
-                    <td>Nordic nRF9160</td>
-                </tr>
-                <tr>
-                    <td class="col-label">SIM</td>
-                    <td>Internal Micro 3FF, Auto-APN</td>
-                </tr>
-                <tr>
-                    <td class="col-label">Antennas</td>
-                    <td>Internal cellular + GPS; external antenna support</td>
-                </tr>
-            </table>
-        </div>
+        <!-- Connectivity + Onboard Features side by side -->
+        <div class="section-row">
+            <div class="section">
+                <div class="section-title">Connectivity</div>
+                <table>
+                    <tr>
+                        <td class="col-label">Standards</td>
+                        <td>LTE-M (Cat-M1), NB-IoT (Cat-NB1/NB2)</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Modem</td>
+                        <td>Nordic nRF9160</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">SIM</td>
+                        <td>Internal Micro 3FF, Auto-APN</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Antennas</td>
+                        <td>Internal cellular + GPS; external antenna support</td>
+                    </tr>
+                </table>
+            </div>
 
-        <div class="section">
-            <div class="section-title">Onboard Features</div>
-            <table>
-                <tr>
-                    <td class="col-label">Accelerometer</td>
-                    <td>3-axis (tamper detection)</td>
-                </tr>
-                <tr>
-                    <td class="col-label">Temperature</td>
-                    <td>Onboard + external option</td>
-                </tr>
-                <tr>
-                    <td class="col-label">Voltage Monitor</td>
-                    <td>Battery + external readings</td>
-                </tr>
-                <tr>
-                    <td class="col-label">Flash Memory</td>
-                    <td>Months of offline storage</td>
-                </tr>
-            </table>
+            <div class="section">
+                <div class="section-title">Onboard Features</div>
+                <table>
+                    <tr>
+                        <td class="col-label">Accelerometer</td>
+                        <td>3-axis (tamper detection)</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Temperature</td>
+                        <td>Onboard + external option</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Voltage Monitor</td>
+                        <td>Battery + external readings</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Flash Memory</td>
+                        <td>Months of offline storage</td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div class="section">
             <div class="section-title">Power Options</div>
-            <div class="feature-cards">
+            <div class="feature-cards cards-4col">
                 <div class="card">
                     <strong>Rechargeable LiPo</strong>
                     <p>3500mAh internal. Full-season deployments. Optional external power or solar.</p>
@@ -493,27 +552,13 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="page-footer">
-        <div class="footer-text">Page 2 of 4</div>
-    </div>
-</div>
-
-<!-- PAGE 3: I/O & HOUSING -->
-<div class="page">
-    <div class="hero">
-        <div class="hero-brand">NIGHTOWL MONITORING</div>
-        <h1 style="font-size: 18px; margin: 0.08in 0;">I/O Interface & Housing</h1>
-    </div>
-
-    <div class="page-content">
         <div class="section">
             <div class="section-title">Input/Output Architecture</div>
             <p>Nine configurable I/O slots with plug-in cards. All cards support flexible power delivery (3.3V, 5V, 12V).</p>
 
             <div class="section-subtitle">Available I/O Cards:</div>
-            <div class="feature-cards">
+            <div class="feature-cards cards-3col">
                 <div class="card">
                     <strong>AgTech1</strong>
                     <p>1x Digital Input, 1x 4-20mA, SDI-12, I2C, 1-Wire/iButton</p>
@@ -557,11 +602,11 @@
     </div>
 
     <div class="page-footer">
-        <div class="footer-text">Page 3 of 4</div>
+        <div class="footer-text">Page 2 of 3</div>
     </div>
 </div>
 
-<!-- PAGE 4: MANAGEMENT & SECURITY -->
+<!-- PAGE 3: MANAGEMENT & SECURITY -->
 <div class="page" style="page-break-after: avoid;">
     <div class="hero">
         <div class="hero-brand">NIGHTOWL MONITORING</div>
