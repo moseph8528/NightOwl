@@ -14,10 +14,8 @@
             --dark-gray: #333;
             --text-gray: #555;
 
-            /* PAGE 1 PRODUCT IMAGE ROW - tune these for the three-up gallery */
-            --p1-image-max-height: 1.7in;
-            --p1-image-gap: 0.06in;
-            --p1-image-margin: 0.18in -0.3in;  /* negative sides widen the row toward page edges */
+            /* PAGE 1 HERO PRODUCT IMAGE - tune width via the column, height via this cap */
+            --p1-hero-image-max-height: 2.6in;  /* raise/lower to control how tall the device image gets */
 
             /* DETAIL-PAGE PRODUCT IMAGE CONTROLS (legacy, kept for reuse) */
             --product-image-max-height: 3.4in;
@@ -92,70 +90,62 @@
             margin-top: 0.04in;
         }
 
-        /* White intro body (gallery + bullets + icons) */
+        /* White intro body (bullets + image, then icons) - no top padding; spacer above provides breathing room */
         .p1-body {
-            padding: 0.05in 0.4in 0.1in 0.4in;
+            padding: 0 0.4in 0.1in 0.4in;
         }
 
-        /* Three-up product gallery */
-        .product-gallery {
+        /* Two columns: bullets left, single device image offset right */
+        .intro-two-col {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: var(--p1-image-gap);
-            margin: var(--p1-image-margin);
+            grid-template-columns: 3.6in 3.9in;  /* image column ~46% of page width */
+            gap: 0.2in;
             align-items: center;
+            margin-bottom: 0.16in;
         }
 
-        .product-gallery .cell { text-align: center; }
-
-        .product-gallery img {
-            max-width: 100%;
-            height: auto;
-            max-height: var(--p1-image-max-height);
-        }
-
-        /* Key feature bullets, two columns */
-        .key-bullets {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.04in 0.3in;
-            margin-top: 0.12in;
-        }
-
-        .key-bullets .b {
+        .bullets-list .b {
             position: relative;
-            padding-left: 0.2in;
+            padding-left: 0.22in;
             font-size: 10.5px;
-            line-height: 1.35;
-            margin: 0.04in 0;
+            line-height: 1.4;
+            margin: 0.075in 0;
+            color: #2a2a2a;
         }
 
-        .key-bullets .b::before {
+        .bullets-list .b::before {
             content: '';
             position: absolute;
-            left: 0.04in;
-            top: 0.055in;
+            left: 0.05in;
+            top: 0.06in;
             width: 6px;
             height: 6px;
             background: var(--cyan);
             border-radius: 50%;
         }
 
-        /* Capability icon row */
+        .hero-image { text-align: center; }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: var(--p1-hero-image-max-height);
+        }
+
+        /* Capability icon row - sits directly above the dark grid */
         .icon-row {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 0.1in;
-            margin-top: 0.22in;
-            padding-top: 0.16in;
+            padding-top: 0.14in;
             border-top: 1px solid #e3e3e3;
         }
 
         .icon-item { text-align: center; }
 
         .icon-item svg {
-            width: 0.42in;
-            height: 0.42in;
+            width: 0.44in;
+            height: 0.44in;
             margin-bottom: 0.05in;
         }
 
@@ -171,14 +161,14 @@
         .feature-grid {
             background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
             color: white;
-            padding: 0.26in 0.4in 0.3in 0.4in;
+            padding: 0.3in 0.4in 0.32in 0.4in;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 0.22in 0.3in;
+            gap: 0.26in 0.3in;
         }
 
         .fg-cell .fg-title {
-            font-size: 11px;
+            font-size: 11.5px;
             font-weight: 700;
             color: white;
             padding-bottom: 0.05in;
@@ -197,8 +187,8 @@
         }
 
         .fg-cell p {
-            font-size: 9px;
-            line-height: 1.35;
+            font-size: 9.5px;
+            line-height: 1.4;
             color: #c7d0e0;
             margin: 0;
         }
@@ -448,21 +438,24 @@
         <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_1_1722033363-trimmy-NightOwl-Monitoring-Logo-White.png" alt="NightOwl Monitoring" class="hero-logo">
     </div>
 
-    <div class="p1-body">
-        <!-- THREE-UP PRODUCT GALLERY - swap the three src URLs for the final images -->
-        <div class="product-gallery">
-            <div class="cell"><img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl-Hawk"></div>
-            <div class="cell"><img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl-Hawk"></div>
-            <div class="cell"><img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl-Hawk"></div>
-        </div>
+    <!-- Flexible space sits here so the icons hug the dark grid below -->
+    <div class="spacer"></div>
 
-        <div class="key-bullets">
-            <div class="b">Robust IoT data logger and sensor hub</div>
-            <div class="b">Available in several power and housing variations</div>
-            <div class="b">Flexible I/O card architecture for near-limitless sensor integrations</div>
-            <div class="b">Robust OTA device management and configuration</div>
-            <div class="b">Integrates with Bluetooth, SDI-12, 1-Wire, 4-20mA, RS-485, RS-232, analog and digital inputs, pulse counting, and more</div>
-            <div class="b">Cellular LTE-M and NB-IoT connectivity with onboard GPS</div>
+    <div class="p1-body">
+        <div class="intro-two-col">
+            <div class="bullets-list">
+                <div class="b">Robust IoT data logger and sensor hub</div>
+                <div class="b">Flexible I/O card architecture for near-limitless sensor integrations</div>
+                <div class="b">Integrates with Bluetooth, SDI-12, 1-Wire, 4-20mA, RS-485, RS-232, analog and digital inputs, pulse counting, and more</div>
+                <div class="b">Available in several power and housing variations</div>
+                <div class="b">Robust OTA device management and configuration</div>
+                <div class="b">Cellular LTE-M and NB-IoT connectivity with onboard GPS</div>
+            </div>
+
+            <!-- MIDDLE PRODUCT IMAGE - paste the middle image URL here -->
+            <div class="hero-image">
+                <img src="https://nightowlmonitoring.com/wp-content/uploads/2026/06/NightOwl-Hawk-1-scaled.png" alt="NightOwl-Hawk">
+            </div>
         </div>
 
         <div class="icon-row">
@@ -492,8 +485,6 @@
             </div>
         </div>
     </div>
-
-    <div class="spacer"></div>
 
     <div class="feature-grid">
         <div class="fg-cell">
