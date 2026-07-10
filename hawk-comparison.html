@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NightOwl Groundwater Monitoring Comparison</title>
+<style>
+  :root {
+    --navy: #071842;
+    --cyan: #4AC8F1;
+    --navy-tint: #eef4fb;
+    --cyan-tint: #e4f7fe;
+    --line: #d5dde8;
+    --ink: #1a2231;
+    --muted: #5c6b80;
+    --warn: #b8791a;
+    --font: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: #59616e; }
+
+  body {
+    font-family: var(--font);
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 1050px;
+    margin: 24px auto;
+    background: #fff;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+  }
+
+  /* Header */
+  .masthead {
+    background: var(--navy);
+    color: #fff;
+    padding: 24px 34px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .masthead .brand { display: flex; align-items: center; gap: 16px; }
+  .masthead img { height: 40px; display: block; }
+  .wordmark { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+  .wordmark span { color: var(--cyan); }
+  .masthead .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--cyan);
+    text-align: right;
+  }
+  .masthead .headright {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  .pdfbtn {
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: var(--navy);
+    background: var(--cyan);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: background 0.15s ease, transform 0.05s ease;
+  }
+  .pdfbtn:hover { background: #6fd6f5; }
+  .pdfbtn:active { transform: translateY(1px); }
+  .pdfbtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .pdfbtn svg { width: 14px; height: 14px; }
+
+  .titleblock { padding: 20px 34px 6px; }
+  .titleblock h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.2px;
+  }
+  .titleblock p {
+    color: var(--muted);
+    font-size: 12.5px;
+    margin-top: 4px;
+    max-width: 780px;
+  }
+
+  /* Table */
+  .tablewrap { padding: 14px 34px 4px; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+
+  col.crit { width: 20%; }
+  col.own  { width: 17%; }
+  col.comp { width: 15.75%; }
+
+  thead th {
+    vertical-align: bottom;
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 2px solid var(--navy);
+  }
+  th.crithead {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  th.prod {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    text-align: center;
+  }
+  th.prod .sub {
+    display: block;
+    font-size: 9.5px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.2px;
+    margin-top: 2px;
+    text-transform: none;
+  }
+  th.ownhead {
+    background: var(--navy);
+    color: #fff;
+    border-bottom: 2px solid var(--cyan);
+    border-radius: 6px 6px 0 0;
+    text-align: center;
+  }
+  th.ownhead .sub { color: var(--cyan); }
+
+  tbody td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+    font-size: 11.5px;
+  }
+  td.crit {
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.25;
+  }
+  td.cell { text-align: center; color: var(--ink); }
+  td.own {
+    background: var(--cyan-tint);
+    text-align: center;
+    border-left: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    font-weight: 500;
+  }
+  tbody tr:last-child td.own { border-bottom: 2px solid var(--cyan); }
+
+  .mark { font-weight: 700; font-size: 13px; line-height: 1; }
+  .yes { color: #0f8a4f; }
+  .part { color: var(--warn); }
+  .no { color: #b3bccb; }
+  .qual { display: block; font-size: 9.5px; color: var(--muted); margin-top: 2px; line-height: 1.2; }
+  td.own .qual { color: #2b5f74; }
+  .flag { color: var(--warn); font-weight: 700; }
+
+  /* Legend + notes */
+  .legend {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    padding: 12px 34px 4px;
+    font-size: 10.5px;
+    color: var(--muted);
+    align-items: center;
+  }
+  .legend b { color: var(--ink); }
+  .legend .mark { font-size: 12px; margin-right: 3px; }
+
+  .notes {
+    padding: 8px 34px 16px;
+    font-size: 9.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .notes .n { display: block; margin-top: 2px; }
+  .notes .flag { color: var(--warn); }
+
+  /* Where NightOwl wins */
+  .wins {
+    background: var(--navy-tint);
+    border-top: 3px solid var(--cyan);
+    padding: 18px 34px 22px;
+  }
+  .wins h2 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .winsgrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .win h3 {
+    font-size: 12.5px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .win h3::before {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: var(--cyan);
+    margin-bottom: 7px;
+  }
+  .win p { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  .foot {
+    background: var(--navy);
+    color: #fff;
+    padding: 12px 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9.5px;
+    letter-spacing: 0.3px;
+  }
+  .foot .tag { color: var(--cyan); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+  .foot .conf { color: #9fb0c9; }
+
+  @media print {
+    @page { size: letter landscape; margin: 0.35in; }
+    html, body { background: #fff; }
+    .pdfbtn { display: none !important; }
+    .page { width: auto; margin: 0; box-shadow: none; }
+    .masthead, .foot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .own, .ownhead, .wins { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <div class="brand">
+      <img src="https://nightowlmonitoring.com/wp-content/uploads/2025/07/imgi_1_1722033363-trimmy-NightOwl-Monitoring-Logo-White.png" alt="NightOwl Monitoring" onerror="this.style.display='none'">
+      <span class="wordmark">NightOwl<span> Monitoring</span></span>
+    </div>
+    <div class="headright">
+      <button class="pdfbtn" onclick="window.print()" aria-label="Download as PDF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Download PDF
+      </button>
+      <div class="eyebrow">Groundwater Monitoring<br>Feature Comparison</div>
+    </div>
+  </div>
+
+  <div class="titleblock">
+    <h1>Choosing a Remote Monitoring Partner for Your District</h1>
+    <p>How the NightOwl-Hawk compares to the platforms most often evaluated for groundwater level monitoring. Prepared for Groundwater Conservation Districts and their consultants.</p>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <colgroup>
+        <col class="crit"><col class="own"><col class="comp"><col class="comp"><col class="comp"><col class="comp">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="crithead">Evaluation Criteria</th>
+          <th class="prod ownhead">NightOwl-Hawk<span class="sub">Turnkey system</span></th>
+          <th class="prod">SignalFire<span class="sub">RANGER / Cloud</span></th>
+          <th class="prod">In-Situ<span class="sub">VuLink / HydroVu</span></th>
+          <th class="prod">Eno Scientific<span class="sub">Well Watch</span></th>
+          <th class="prod">Wellntel<span class="sub">Sensor / Dashboard</span></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td class="crit">Easy field deployment</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Turnkey kit</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">External mount</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Cellular remote monitoring</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Built in, NTN-ready &dagger;</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Cellular or 900MHz</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Optional modem</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Via gateway</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Long battery life</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Bench-tested &Dagger;</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Extended</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Battery model only</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Calibration-free level reading</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Pressure transducer</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Sensor-dependent</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Sensor-dependent</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Sonic, no calibration</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Drift-free acoustic</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Water temperature monitoring</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Included</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Sensor-dependent</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Native</span></td>
+          <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Level only</span></td>
+          <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Level only</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Cloud dashboard</td>
+          <td class="own"><span class="mark yes">&#10003;</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">SignalFire Cloud</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">HydroVu</span></td>
+          <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Integrate your own</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Analytics Dashboard</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Automated reporting</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Per-well scheduling</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Scheduled PDF/Excel</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span></td>
+          <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Manual export</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Custom scheduled</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">State-format / HALFF GMS export</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual"><span class="flag">Confirm shipping &sect;</span></span></td>
+          <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Not advertised</span></td>
+          <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Not advertised</span></td>
+          <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Not advertised</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Texas GCD sites &para;</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Secure API for your own systems</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Included &dagger;</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Cloud subscription</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">HydroVu, verify</span></td>
+          <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Modbus output only</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">GET / PUT / POST</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Multi-tenant user access</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Admin plus scoped</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Group hierarchy</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Network sharing</span></td>
+          <td class="cell"><span class="mark no">&#8212;</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Role-based</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Open data and ownership</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Data included</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">API gated</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">In-Situ ecosystem</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Local logger</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Sensor-agnostic</span></td>
+        </tr>
+
+        <tr>
+          <td class="crit">Try-before-you-buy assurance</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">60-day loaner</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Reseller trial</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Support only</span></td>
+          <td class="cell"><span class="mark no">&#8212;</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Paid services</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <span><span class="mark yes">&#10003;</span><b>Native / standard</b></span>
+    <span><span class="mark part">&#9651;</span><b>Conditional or add-on</b></span>
+    <span><span class="mark no">&#8212;</span><b>Not offered natively</b></span>
+  </div>
+
+  <div class="notes">
+    <span class="n"><span class="flag">&dagger;</span> NightOwl API availability, whether it is included versus an add-on, and NTN-ready framing to be confirmed with the team before external use.</span>
+    <span class="n"><span class="flag">&Dagger;</span> Battery life figures pending completion of the in-house bench test on the shipped configuration.</span>
+    <span class="n"><span class="flag">&sect;</span> HALFF GMS / state-format export is the strongest GCD differentiator if confirmed. Verify shipping versus roadmap status before this line appears on customer-facing collateral.</span>
+    <span class="n"><span class="flag">&para;</span> Wellntel serves Texas GCDs including Post Oak Savannah GCD and works with the Edwards Aquifer Authority; treat as the primary competitor in this market. State-submission handling not independently confirmed.</span>
+    <span class="n">Competitor entries validated against each vendor's published product documentation, July 2026. Internal sales reference. Not for public distribution without review.</span>
+  </div>
+
+  <div class="wins">
+    <h2>Where the NightOwl-Hawk Wins</h2>
+    <div class="winsgrid">
+      <div class="win">
+        <h3>One vendor, one system</h3>
+        <p>Hardware, dashboard, reporting, and support in a single package. Not a sensor you wire into someone else's platform, and not a set of instruments pieced together.</p>
+      </div>
+      <div class="win">
+        <h3>Built for GCD reporting</h3>
+        <p>Pick the wells, the format, the recipient, and the schedule. The report sends itself, so getting data to the state stops being a monthly chore.</p>
+      </div>
+      <div class="win">
+        <h3>Try it before grant funds move</h3>
+        <p>A 60-day loaner on a live well at zero cost. See the data on your own site before a dollar of grant money is committed.</p>
+      </div>
+      <div class="win">
+        <h3>Purpose-built for groundwater</h3>
+        <p>Designed for wells and districts from the start, not adapted from industrial or oil-and-gas telemetry, and priced for the field.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span class="tag">NightOwl Monitoring</span>
+    <span class="conf">Internal sales reference &middot; Validated July 2026 &middot; Confirm flagged items before external use</span>
+  </div>
+
+</div>
+</body>
+</html>
