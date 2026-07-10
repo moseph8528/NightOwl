@@ -35,6 +35,8 @@
     margin: 20px auto;
     background: #fff;
     box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
   }
 
   /* Header */
@@ -132,7 +134,7 @@
   .notes .flag { color: var(--review-ink); font-weight: 700; }
 
   /* Where NightOwl wins */
-  .wins { background: var(--navy-tint); border-top: 3px solid var(--cyan); padding: 8px 26px 9px; }
+  .wins { background: var(--navy-tint); border-top: 3px solid var(--cyan); padding: 8px 26px 9px; flex: 1 1 auto; }
   .wins h2 { font-size: 9.5px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--navy); margin-bottom: 6px; }
   .winsgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .win h3 { font-size: 11px; color: var(--navy); margin-bottom: 2px; }
@@ -144,9 +146,10 @@
   .foot .conf { color: #9fb0c9; }
 
   @media print {
-    @page { size: letter landscape; margin: 0.3in; }
+    @page { size: letter landscape; margin: 0; }
     html, body { background: #fff; }
-    .page { width: auto; margin: 0; box-shadow: none; }
+    .page { width: auto; margin: 0; box-shadow: none; min-height: 8.5in; }
+    .wins { flex: 1 1 auto; }
     .pdfbtn { display: none !important; }
     .masthead, .foot, .own, .ownhead, .wins, .callout, .review { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
