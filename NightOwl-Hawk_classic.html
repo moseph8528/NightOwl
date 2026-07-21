@@ -501,7 +501,7 @@
     <div class="feature-grid">
         <div class="fg-cell">
             <div class="fg-title">I/O Card Architecture</div>
-            <p>Plug-in cards define the nine inputs and outputs, offering near-limitless options for interfacing to sensors.</p>
+            <p>A single plug-in card defines up to nine inputs and outputs, offering near-limitless options for interfacing to sensors.</p>
         </div>
         <div class="fg-cell">
             <div class="fg-title">Unmatched Flexibility</div>
@@ -521,7 +521,7 @@
         </div>
         <div class="fg-cell">
             <div class="fg-title">Onboard Smarts</div>
-            <p>Onboard GPS location and months of offline data storage.</p>
+            <p>Onboard GPS location, with flash storage for offline logging and later upload.</p>
         </div>
         <div class="fg-cell">
             <div class="fg-title">OTA Device Management</div>
@@ -560,18 +560,17 @@
                 <table>
                     <tr><td class="col-label">Standards</td><td>LTE-M (Cat-M1), NB-IoT (Cat-NB1/NB2)</td></tr>
                     <tr><td class="col-label">NTN</td><td>Satellite-ready hardware, enabled via future firmware update</td></tr>
-                    <tr><td class="col-label">Modem</td><td>Nordic nRF9160</td></tr>
-                    <tr><td class="col-label">SIM</td><td>Internal Micro 3FF, Auto-APN</td></tr>
-                    <tr><td class="col-label">Antennas</td><td>Internal cellular + GPS; external antenna support</td></tr>
+                    <tr><td class="col-label">Modem</td><td>Nordic nRF9151</td></tr>
+                    <tr><td class="col-label">SIM</td><td>Internal Micro 3FF</td></tr>
+                    <tr><td class="col-label">Antennas</td><td>Internal cellular + GPS; optional external high-gain cellular antenna</td></tr>
                 </table>
             </div>
             <div class="section">
                 <div class="section-title">Onboard Features</div>
                 <table>
-                    <tr><td class="col-label">Accelerometer</td><td>3-axis (tamper detection)</td></tr>
                     <tr><td class="col-label">Temperature</td><td>Onboard + external option</td></tr>
                     <tr><td class="col-label">Voltage Monitor</td><td>Battery + external readings</td></tr>
-                    <tr><td class="col-label">Flash Memory</td><td>Months of offline storage</td></tr>
+                    <tr><td class="col-label">Flash Memory</td><td>Flash storage supports offline data logging and later upload when connectivity is restored</td></tr>
                 </table>
             </div>
         </div>
@@ -588,13 +587,13 @@
 
         <div class="band-title">Input/Output Architecture</div>
         <div class="section">
-            <p>Nine configurable I/O slots with plug-in cards. All cards support flexible power delivery (3.3V, 5V, 12V).</p>
+            <p>Accepts one plug-in I/O card providing up to nine card-defined inputs and outputs, depending on the selected card. Sensor-power outputs and supported voltages depend on the selected I/O card.</p>
             <div class="section-subtitle">Available I/O Cards:</div>
             <div class="feature-cards cards-3col">
-                <div class="card"><strong>AgTech1</strong><p>1x Digital Input, 1x 4-20mA, SDI-12, I2C, 1-Wire/iButton</p></div>
-                <div class="card"><strong>AgTech2</strong><p>4x Analog Inputs (0-30V), SDI-12, 1-Wire</p></div>
-                <div class="card"><strong>RS-1</strong><p>RS485, 1x Analog Input, 1x 4-20mA, 1-Wire</p></div>
-                <div class="card"><strong>Serial</strong><p>RS-232 TX/RX, TTL TX/RX, 2x Digital Inputs</p></div>
+                <div class="card"><strong>AgTech1</strong><p>1x Digital In, 1x 4-20mA, SDI-12, I2C, 1-Wire/iButton, switched-ground out, 3.3/5/12V sensor power</p></div>
+                <div class="card"><strong>AgTech2</strong><p>4x Analog In (0-30V), SDI-12, 1-Wire, switched-ground out, 3.3/5/12V sensor power</p></div>
+                <div class="card"><strong>RS-1</strong><p>RS485, 1x Analog In, 1x Digital In, 1x 4-20mA, 1-Wire, switched-ground out, 3.3/5/12V sensor power</p></div>
+                <div class="card"><strong>Serial</strong><p>RS-232 TX/RX, TTL TX/RX, 1x Analog In, 2x Digital In, switched-ground out, 5/12V sensor power</p></div>
                 <div class="card"><strong>Digital</strong><p>2x Analog Inputs, 5x Digital Inputs, pulse counting</p></div>
                 <div class="card"><strong>Bluetooth+</strong><p>Full I/O + Bluetooth module (BGM240PA22VNA3)</p></div>
             </div>
@@ -603,8 +602,8 @@
         <div class="section">
             <div class="section-title">Housing Options</div>
             <table>
-                <tr><td class="col-label">HawkLipo</td><td>185 x 150 x 30 mm. PCB + I/O + 3500mAh LiPo. IP68/IK08. Multiple mounting options.</td></tr>
-                <tr><td class="col-label">Hawk2D</td><td>180 x 119 x 39 mm. PCB + I/O + 2x D Cell. IP68/IK08. Multiple mounting options.</td></tr>
+                <tr><td class="col-label">HawkLipo</td><td>180 x 119 x 39 mm. PCB + I/O + 3500mAh LiPo. IP68/IK08, GORE vent. Multiple mounting options.</td></tr>
+                <tr><td class="col-label">Hawk2D</td><td>185 x 150 x 30 mm. PCB + I/O + 2x D Cell. IP68/IK07, optional GORE vent. Multiple mounting options.</td></tr>
             </table>
         </div>
     </div>
@@ -631,7 +630,7 @@
 
         <div class="section">
             <div class="section-title">Task Management</div>
-            <p>Powerful onboard task management allows scheduling jobs or triggering responses based on sensor thresholds and events, even without cellular coverage. Store-and-forward ensures no data loss.</p>
+            <p>Powerful onboard task management allows scheduling jobs or triggering responses based on sensor thresholds and events, even without cellular coverage. Store-and-forward stores records during connectivity interruptions for later upload, subject to available device memory.</p>
             <div class="section-subtitle">Integration Methods:</div>
             <table>
                 <tr><td class="col-label">TCP Direct</td><td>Real-time data push</td></tr>
@@ -642,15 +641,15 @@
         <div class="section">
             <div class="section-title">Security &amp; Compliance</div>
             <table>
-                <tr><td class="col-label">Encryption</td><td>Military-level AES-256 end-to-end</td></tr>
-                <tr><td class="col-label">Transport</td><td>HTTPS for all third-party forwarding</td></tr>
+                <tr><td class="col-label">Encryption</td><td>AES-256 encryption between the device and Device Manager</td></tr>
+                <tr><td class="col-label">Transport</td><td>HTTPS-secured delivery to supported third-party platforms</td></tr>
                 <tr><td class="col-label">Warranty</td><td>Two years manufacturer warranty</td></tr>
             </table>
         </div>
 
         <div class="quick-ref">
             <strong>Quick Reference</strong>
-            Connectivity: LTE-M/NB-IoT + GPS, NTN Ready | I/O: 9 Slots | Power: LiPo/D Cell/External | Temp: -30°C to +60°C | Housing: IP68/IK08/GORE Vented | Security: AES-256
+            Connectivity: LTE-M/NB-IoT + GPS, NTN Ready | I/O: Up to 9 (card-defined) | Power: LiPo/D Cell/External | Temp: -30°C to +60°C | Housing: IP68, IK07/IK08, optional GORE vent | Security: AES-256
         </div>
 
         <div style="text-align: center; margin-top: 0.1in;">
