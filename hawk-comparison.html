@@ -10,9 +10,6 @@
     --cyan: #4AC8F1;
     --navy-tint: #eef4fb;
     --cyan-tint: #e4f7fe;
-    --review-bg: #fbe3e3;
-    --review-line: #d9736f;
-    --review-ink: #a3322d;
     --line: #d5dde8;
     --ink: #1a2231;
     --muted: #5c6b80;
@@ -73,26 +70,21 @@
   .titleblock h1 { font-size: 24px; font-weight: 700; color: var(--navy); letter-spacing: -0.2px; }
   .titleblock p { color: var(--muted); font-size: 10.5px; margin-top: 4px; max-width: 780px; }
 
-  /* Review callout */
-  .callout {
-    margin: 7px 26px 0;
-    background: var(--review-bg);
-    border: 1px solid var(--review-line);
-    border-left: 4px solid var(--review-line);
+  /* Positioning statement band */
+  .positioning {
+    margin: 11px 26px 0;
+    background: var(--cyan-tint);
+    border-left: 4px solid var(--cyan);
     border-radius: 4px;
-    padding: 5px 11px;
-    font-size: 9.5px;
-    color: var(--review-ink);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .callout b { font-weight: 700; }
-  .callout .dot {
-    display: inline-block; width: 13px; height: 13px; border-radius: 3px;
-    background: var(--review-bg); border: 1.5px solid var(--review-line); flex: 0 0 auto;
+    padding: 9px 14px;
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--navy);
+    font-weight: 500;
   }
 
   /* Table */
-  .tablewrap { padding: 6px 26px 2px; }
+  .tablewrap { padding: 8px 26px 2px; }
   table { width: 100%; border-collapse: collapse; table-layout: fixed; }
   col.crit { width: 20%; }
   col.own  { width: 17%; }
@@ -111,11 +103,6 @@
   td.own { background: var(--cyan-tint); text-align: center; border-left: 2px solid var(--cyan); border-right: 2px solid var(--cyan); font-weight: 500; }
   tbody tr:last-child td.own { border-bottom: 2px solid var(--cyan); }
 
-  /* Flagged cells needing confirmation */
-  td.own.review { background: var(--review-bg); border-left: 2px solid var(--review-line); border-right: 2px solid var(--review-line); }
-  td.own.review .qual { color: var(--review-ink); font-weight: 700; }
-  tbody tr:last-child td.own.review { border-bottom: 2px solid var(--review-line); }
-
   .mark { font-weight: 700; font-size: 11px; line-height: 1; }
   .yes { color: #0f8a4f; }
   .part { color: var(--warn); }
@@ -127,11 +114,9 @@
   .legend { display: flex; gap: 18px; flex-wrap: wrap; padding: 5px 26px 2px; font-size: 9.5px; color: var(--muted); align-items: center; }
   .legend b { color: var(--ink); }
   .legend .mark { font-size: 11px; margin-right: 3px; }
-  .legend .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: var(--review-bg); border: 1.5px solid var(--review-line); margin-right: 4px; vertical-align: -2px; }
 
   .notes { padding: 4px 26px 8px; font-size: 8.5px; color: var(--muted); line-height: 1.4; }
   .notes .n { display: block; }
-  .notes .flag { color: var(--review-ink); font-weight: 700; }
 
   /* Where NightOwl wins */
   .wins { background: var(--navy-tint); border-top: 3px solid var(--cyan); padding: 8px 26px 9px; flex: 1 1 auto; }
@@ -151,7 +136,7 @@
     .page { width: auto; margin: 0; box-shadow: none; min-height: 8.5in; }
     .wins { flex: 1 1 auto; }
     .pdfbtn { display: none !important; }
-    .masthead, .foot, .own, .ownhead, .wins, .callout, .review { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .masthead, .foot, .own, .ownhead, .wins, .positioning { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
@@ -177,9 +162,8 @@
     <p>How the NightOwl-Hawk compares to the platforms most often evaluated for groundwater level monitoring. Prepared for Groundwater Conservation Districts and their consultants.</p>
   </div>
 
-  <div class="callout">
-    <span class="dot"></span>
-    <span><b>One item remains open.</b> The Secure API cell (shaded red) is pending internal confirmation before external use. All other cells are validated and cleared.</span>
+  <div class="positioning">
+    NightOwl combines a turnkey groundwater-monitoring platform with flexible sensor integration, included API access, and multi-tenant visibility for districts, consultants, and participating landowners.
   </div>
 
   <div class="tablewrap">
@@ -227,12 +211,12 @@
         </tr>
 
         <tr>
-          <td class="crit">Calibration-free level reading</td>
-          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Pressure transducer</span></td>
-          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Sensor-dependent</span></td>
-          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Sensor-dependent</span></td>
-          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Sonic, no calibration</span></td>
-          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Drift-free acoustic</span></td>
+          <td class="crit">Flexible level-sensor compatibility</td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Sensor-agnostic: pressure, Modbus, and more</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Modbus, HART, SDI-12</span></td>
+          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">SDI-12, Pulse, third-party</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Acoustic-only</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Acoustic-only</span></td>
         </tr>
 
         <tr>
@@ -247,7 +231,7 @@
         <tr>
           <td class="crit">Cloud dashboard</td>
           <td class="own"><span class="mark yes">&#10003;</span></td>
-          <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">SignalFire Cloud</span></td>
+          <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Optional cloud/dashboard; configuration or development is required.</span></td>
           <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">HydroVu</span></td>
           <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Integrate your own</span></td>
           <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Analytics Dashboard</span></td>
@@ -262,10 +246,9 @@
           <td class="cell"><span class="mark yes">&#10003;</span><span class="qual">Custom scheduled</span></td>
         </tr>
 
-
         <tr>
           <td class="crit">Secure API for your own systems</td>
-          <td class="own review"><span class="mark yes">&#10003;</span><span class="qual">Included &dagger;</span></td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Included, no API access upcharge</span></td>
           <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Cloud subscription</span></td>
           <td class="cell"><span class="mark part">&#9651;</span><span class="qual">HydroVu, verify</span></td>
           <td class="cell"><span class="mark no">&#8212;</span><span class="qual">Modbus output only</span></td>
@@ -283,7 +266,7 @@
 
         <tr>
           <td class="crit">Open data and ownership</td>
-          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Data included</span></td>
+          <td class="own"><span class="mark yes">&#10003;</span><span class="qual">Open API access; district data remains accessible and portable.</span></td>
           <td class="cell"><span class="mark part">&#9651;</span><span class="qual">API gated</span></td>
           <td class="cell"><span class="mark part">&#9651;</span><span class="qual">In-Situ ecosystem</span></td>
           <td class="cell"><span class="mark part">&#9651;</span><span class="qual">Local logger</span></td>
@@ -307,11 +290,9 @@
     <span><span class="mark yes">&#10003;</span><b>Native / standard</b></span>
     <span><span class="mark part">&#9651;</span><b>Conditional or add-on</b></span>
     <span><span class="mark no">&#8212;</span><b>Not offered natively</b></span>
-    <span><span class="swatch"></span><b>Pending confirmation</b></span>
   </div>
 
   <div class="notes">
-    <span class="n"><span class="flag">&dagger; Pending confirmation:</span> whether the NightOwl API is included in the standard package versus a paid add-on. To confirm before external use. SignalFire gates its API behind a paid Cloud subscription, so an included, open API is a real differentiator if accurate.</span>
     <span class="n">Wellntel serves Texas GCDs including Post Oak Savannah GCD and works with the Edwards Aquifer Authority; treat as the primary competitor here. Competitor entries validated against published documentation, July 2026. Internal sales reference, not for public distribution without review.</span>
   </div>
 
@@ -339,7 +320,7 @@
 
   <div class="foot">
     <span class="tag">NightOwl Monitoring</span>
-    <span class="conf">Internal sales reference &middot; Validated July 2026 &middot; Confirm Secure API cell before external use</span>
+    <span class="conf">Internal sales reference &middot; Validated July 2026</span>
   </div>
 
 </div>
